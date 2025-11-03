@@ -1,0 +1,58 @@
+body, html {
+    display: flex;
+    flex-direction: column;
+    
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Ensure the body and html elements take full height */
+}
+
+.one {
+    display: flex;
+ 
+    gap: 50px;
+    border: 2px solid red;
+ 
+}
+
+.image1 {
+    width: 100%;        /* Make the image responsive */
+    /* Maximum width of 1000px */
+    height: 300px;      /* Fixed height */
+    background-color: aliceblue;
+}
+
+.wall
+{
+    flex: 1 1 15%;
+}
+
+.container
+{
+    flex: 1 1 70%;
+    display: flex;
+    flex-direction: column;
+     gap: 50px;
+    border: 2px solid red;
+    align-items: center;
+}
+
+.two
+{
+    
+}
+
+.three
+{
+    
+}
+
+.four
+{
+    
+}
+
+.footernote
+{
+    
+}
