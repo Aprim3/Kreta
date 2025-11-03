@@ -81,14 +81,15 @@ a
 .quote
 {
     display: flex;
-    justify-content: center;
-    align-items: center;
+   justify-content: center;
+   
     width: 100%;
     background-color: antiquewhite;
     padding: 60px;
-    text-align: center;
+    box-sizing: border-box;
     font-size: x-large;
     font-weight: 800;
+    border: 2px solid red;
 }
 
 .paragraph
