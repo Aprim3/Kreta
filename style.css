@@ -38,7 +38,7 @@ body, html {
     width: 100%;
     display: flex;
     gap: 10px;
-    background-color: #836539;
+    background-color: #7dd8f4;
     align-items: center;
     padding: 22px;
     box-sizing: border-box;
@@ -111,6 +111,15 @@ a
     margin-bottom: 30px;
     flex-wrap: wrap;
 }
+
+.container2
+{
+    flex: 1 1 80%;
+    display: flex;
+    border: 2px solid red;
+    align-items: center;
+}
+
 
 .footernote
 {
