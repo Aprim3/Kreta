@@ -86,7 +86,8 @@ a
     justify-content: center;
     width: 100%;
     background-color: antiquewhite;
-    padding: 120px;
+    padding-bottom: 120px;
+    padding-top: 120px;
     box-sizing: border-box;
     font-size: x-large;
     font-weight: 800;
