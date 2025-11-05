@@ -111,6 +111,7 @@ a
     border: 2px solid red;
     align-items: center;
     flex-wrap: wrap;
+    box-sizing: border-box;
 }
 
 .container2
