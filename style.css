@@ -38,7 +38,7 @@ body, html {
 {
     width: 100%;
     display: flex;
-    gap: 10px;
+    gap: 15px;
     background-color: #87ceeb;
     align-items: center;
     padding: 30px;
