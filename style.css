@@ -188,3 +188,20 @@ a
     background-image: url(./images/1.jpg);
     background-size: cover;
 }
+
+.boxer
+{
+    height: 250px;
+    width: 250px;
+    border: 5px solid red;
+    border-radius: 25px;
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;  
+    display: flex; 
+    flex-direction: column;
+    font-size: x-large; 
+    font-weight: 800;
+    justify-content: center; 
+    align-items: center;
+}
