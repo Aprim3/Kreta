@@ -40,7 +40,6 @@ body, html {
     width: 100%;
     display: flex;
     gap: 15px;
-    background-color: #87ceeb;
     align-items: center;
     padding: 30px;
     box-sizing: border-box;
@@ -182,4 +181,10 @@ a
     width: 125px; 
     height: 125px; 
     background-color: white;
+}
+
+#hero
+{
+    background-image: url(./images/1.jpg);
+    background-size: cover;
 }
