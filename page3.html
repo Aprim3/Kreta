@@ -2,6 +2,20 @@
 <html lang="en">
 <head>
 
+
+<style>
+    li {
+  display: block;
+  float: left;
+  width: 25%;
+  border: 2px solid white;
+  padding: 5px;
+  height: 40px;
+  background-color: #4a2db6;
+  color: white;
+}
+</style>
+
      <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -109,6 +123,76 @@
     </div>
 </div>
 
+<div class="one">
+<div class="wall"></div>
+<div class="container">
+<label for="month">Select month: </label>
+<select id="month">
+  <option value="January">January</option>
+  <option value="February">February</option>
+  <option value="March">March</option>
+  <option value="April">April</option>
+  <option value="May">May</option>
+  <option value="June">June</option>
+  <option value="July">July</option>
+  <option value="August">August</option>
+  <option value="September">September</option>
+  <option value="October">October</option>
+  <option value="November">November</option>
+  <option value="December">December</option>
+</select>
+
+
+
+<ul></ul>
+</div>
+<div class="wall"></div>
+</div>
+
+
+<script>
+    const select = document.querySelector("select");
+const list = document.querySelector("ul");
+
+
+select.addEventListener("change", () => {
+  const choice = select.value;
+  createCalendar(choice);
+});
+
+function createCalendar(month) {
+  let days = 31;
+
+  // ADD CONDITIONAL HERE
+
+ 
+
+  if(month === "February")
+  {
+    days = 28;
+  }
+  else if(month === "April" ||
+    month === "June" ||
+    month === "September" ||
+    month === "November")
+  {
+    days = 30;
+  }
+
+  
+
+  list.textContent = "";
+ 
+  for (let i = 1; i <= days; i++) {
+    const listItem = document.createElement("li");
+    listItem.textContent = i;
+    list.appendChild(listItem);
+  }
+}
+
+select.value = "January";
+createCalendar("January");
+</script>
 
     </div>
 
