@@ -1,7 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<style>
 
+    .travel-card {
+  width: 330px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", sans-serif;
+}
+
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 18px 20px;
+  
+}
+
+.card-content h2 {
+  font-size: 1.4rem;
+  margin: 0 0 10px 0;
+  font-weight: 600;
+}
+
+.card-content p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+.cta-btn {
+  padding: 12px 20px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cta-btn:hover {
+  background: #333;
+}
+
+.scrollmenu {
+    padding: 0 12% 0 12%;
+    box-sizing: border-box;
+    display: flex;
+    gap: 45px;
+    padding-bottom: 40px;
+    width: 100%;
+    height: fit-content;
+    /**used to scroll text*/
+    white-space: nowrap;    
+    overflow-x: scroll;
+    overflow-y: hidden;    /**keep scrolling when
+      *finger or cursor scrolling*/
+    -webkit-overflow-scrolling: touch; 
+}.product-card {
+    background-color: red;
+    float: none;
+    display: inline-block;
+}/*to hide the scrollbars*/
+::-webkit-scrollbar {
+    display: none;
+}
+
+</style>
      <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,82 +82,149 @@
 </head>
 <body>
     
-        
-    <div class="one" style="background-color: #87ceeb;">
+   <div class="one">
         <div class="wall"></div>
-        <div class="container">
-            <div class="header">
-                <a href="./index.html" class="link">Start</a>
-                <a href="./page1.html" class="link">Page one</a>
-                <a href="./page2.html" class="link">Page two</a>
-                <a href="./page3.html" class="link">Page three</a>
-                <a href="./page4.html" class="link">Page four</a>
+        <div class="">
+
+        </div>
+        <div class="wall"></div>
+   </div>
+
+
+   <div class="one">
+        <div class="wall"></div>
+        <div class="container1" style="padding: 75px 0 100px 0; width: 100%; gap: 5%;">
+            <div class="container" style="flex: 1 1 45%; align-self: flex-start;">
+                <img src="#" style="width: 100%; height: 100%; background-color: lightgray;">
+            </div>
+            <div class="container4" style="align-items: flex-start; gap: 40px; flex: 1 1 45%; width: 100%; height: 100%;">
+                <div>
+                    <h2>
+                        TITLE
+                    </h2>
+                    <p>
+                        Desc:
+                    </p>
+                </div>
+                <div style="width: 100%; flex: 1 1 auto;">
+                    <input type="text" id="1" name="1" value="Beskrivning" style="width: 100%; height: 100%; background-color: lightgray;">
+                </div>
+                <div class="container1" style="gap: 10%; width: 100%; justify-content: space-between; flex: none;">
+                    <div style="flex: auto;">
+                        <button style="width: 100%; height: 60px;"></button>
+                    </div>
+                    <div style="flex: auto;">
+                        <form>
+                            <button style="width: 100%; height: 60px;"></button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="wall"></div>
-    </div>
-        
+   </div>
+
+
+
+
+
+
+
+<div class="scrollmenu">
+    <div class="product-card">
+        <div class="travel-card">
+  <img src="./images/2.jpg"  class="card-image"/>
+
+  <div class="card-content">
+    <h2>Sarakina & Zourva</h2>
+    <p>
+      Far its historic temples, cherry blossoms, and serene gardens.  
+      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
+    </p>
+
+    <button class="cta-btn">Book Now →</button>
+  </div>
+</div>
+</div>
+    <div class="product-card">
+        <div class="travel-card">
+  <img src="./images/komolithi.PNG" alt="Kyoto, Japan" class="card-image" />
+
+  <div class="card-content">
+    <h2>Komolithi</h2>
+    <p>
+      Far its historic temples, cherry blossoms, and serene gardens.  
+      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
+    </p>
+
+    <button class="cta-btn">Book Now →</button>
+  </div>
+</div>
+</div>
+    <div class="product-card">
+        <div class="travel-card">
+  <img src="./images/Falassarna.jpg" alt="Kyoto, Japan" class="card-image" />
+
+  <div class="card-content">
+    <h2>Falassarna</h2>
+    <p>
+      Far its historic temples, cherry blossoms, and serene gardens.  
+      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
+    </p>
+
+    <button class="cta-btn">Book Now →</button>
+  </div>
+</div>
+</div>
+    <div class="product-card">
+        <div class="travel-card">
+  <img src="./images/zourva.jpg" alt="Kyoto, Japan" class="card-image" />
+
+  <div class="card-content">
+    <h2>Zourva</h2>
+    <p>
+      Far its historic temples, cherry blossoms, and serene gardens.  
+      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
+    </p>
+
+    <button class="cta-btn">Book Now →</button>
+  </div>
+</div>
+</div>
+ <div class="product-card">
+        <div class="travel-card">
+  <img src="./images/ravdouxa.jpg"  class="card-image"/>
+
+  <div class="card-content">
+    <h2>Ravdouxa</h2>
+    <p>
+      Far its historic temples, cherry blossoms, and serene gardens.  
+      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
+    </p>
+
+    <button class="cta-btn">Book Now →</button>
+  </div>
+</div>
+</div>
+<div class="product-card">
+        <div class="travel-card">
+  <img src="#"  class="card-image"/>
+
+  <div class="card-content">
+    <h2>Kyoto, Japan</h2>
+    <p>
+      Far its historic temples, cherry blossoms, and serene gardens.  
+      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
+    </p>
+
+    <button class="cta-btn">Book Now →</button>
+  </div>
+</div>
+</div>
    
-    <div class="one">
-        <div class="wall"></div>
-            <div class="quote" style="background-color: white; padding: 40px;">
-                <p>Hej</p>
-            </div>
-        <div class="wall"></div>
-    </div>
-
-
-
-    <div class="one">
-    <div class="wall">
-    </div>
-    <div class="container1" style="padding-top: 50px; padding-bottom: 50px;"x>
-        
-        <img src="./images/me2.png" style="width: 500px; height: 350px;">
-        
-        <div class="paragraph" style="width: 300px; height: 350px;"> <!-- Text-->
-              <div style="border: 2px solid red; width: 250px; height: 50px; margin: 25px;"></div>
-              <div style="border: 2px solid red; width: 250px; height: 50px; margin: 25px;"></div>
-              <div style="border: 2px solid red; width: 250px; height: 130px; margin: 25px;"></div>
-        </div>
-    </div>
-    <div class="wall">
-    </div>
 </div>
 
 
-
-    <div class="one">
-        <div class="wall"></div>
-            <div class="quote" style="background-color: white; padding: 40px;">
-                <p>FAQ</p>
-            </div>
-        <div class="wall"></div>
-    </div>
-
-
-    <div class="one" style="margin-bottom: 50px;">
-        <div class="wall"></div>
-            <div class="container">
-                <div class="drop">
-                <p>Fråga 1</p>
-                </div>
-                <div class="box"></div>
-                <div class="drop">
-                <p>Fråga 2</p>
-                </div>
-                <div class="drop">
-                <p>Fråga 3</p>
-                </div>
-                <div class="drop">
-                <p>Fråga 4</p>
-                </div>
-                <div class="drop">
-                <p>Fråga 5</p>
-                </div>
-            </div>
-        <div class="wall"></div>
-    </div>
 
 
 <div class="one" style="background-color: #1F2937;">
