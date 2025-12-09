@@ -3,8 +3,13 @@ body, html {
     flex-direction: column;
     margin: 0;
     padding: 0;
-    background-color: #f3f3fe;
+    background-color: white;
+    font-size: 14.5px;
 }
+
+h1 { font-size: clamp(1.8rem, 4vw, 3rem); }
+h2 { font-size: clamp(1.4rem, 3vw, 2.2rem); }
+p  { font-size: clamp(1rem, 2vw, 1.25rem); }
 
 *
 {
@@ -14,7 +19,7 @@ body, html {
 
 .one {
     display: flex;
-    gap: 50px;
+    
     border: 2px solid red;
 }
 
@@ -59,8 +64,8 @@ a
 
 .link
 {
-    color: white;
-    font-size: large;
+    color: #f3f3fe;
+    font-size: 113%;
     font-weight: 550;
 }
 
@@ -110,6 +115,27 @@ a
     display: flex;
     border: 2px solid red;
     align-items: center;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.container3
+{
+    flex: 1 1 auto;
+    display: flex;
+    border: 2px solid red;
+    align-items: center;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.container4
+{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid red;
+    justify-content: center;
     flex-wrap: wrap;
     box-sizing: border-box;
 }
@@ -193,13 +219,13 @@ a
 
 #hero
 {
-    background-image: url(./images/1.jpg);
+    background-image: url(./images/Header.png);
     background-size: cover;
 }
 
 .boxer
 {
-    height: 250px;
+    height: 150px;
     width: 250px;
     border: 5px solid red;
     border-radius: 25px;
@@ -208,7 +234,7 @@ a
     text-align: center;  
     display: flex; 
     flex-direction: column;
-    font-size: x-large; 
+    font-size: 22px; 
     font-weight: 800;
     justify-content: center; 
     align-items: center;
