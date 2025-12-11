@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+
+  .accordion-content p
+  {
+    font-size: 1.1vw;
+  }
+
+  .accordion {
+  max-width: 500px;
+  width: 50%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+/* The clickable bar */
+.accordion-title {
+  display: block;
+  background: #1F2937;
+  color: white;
+  padding: 12px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Hide the checkbox */
+.accordion input {
+  display: none;
+}
+
+/* Hidden content */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  background: #f4f4f4;
+  padding: 0 12px;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+/* When checkbox is checked → expand */
+.accordion input:checked ~ .accordion-content {
+  max-height: 200px; /* adjust if needed */
+  padding: 12px;
+}
+
+.travel-card {
+  width: 330px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", sans-serif;
+}
+
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 18px 20px;
+  
+}
+
+.card-content h2 {
+  font-size: 1.4rem;
+  margin: 0 0 10px 0;
+  font-weight: 600;
+}
+
+.card-content p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+.cta-btn {
+  padding: 12px 20px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cta-btn:hover {
+  background: #333;
+}
+
+.scrollmenu {
+    display: flex;
+    gap: 45px;
+    padding: 0 10% 40px 10%;
+    width: 100%;
+    height: fit-content;
+    /**used to scroll text*/
+    white-space: nowrap;    
+    overflow-x: scroll;
+    overflow-y: hidden;    /**keep scrolling when
+      *finger or cursor scrolling*/
+    -webkit-overflow-scrolling: touch; 
+}.product-card {
+    background-color: red;
+    float: none;
+    display: inline-block;
+}/*to hide the scrollbars*/
+::-webkit-scrollbar {
+    display: none;
+}
+
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kreta</title>
+</head>
+<body>
+    
+    
+        
+    <div class="one" id="hero" style="padding-bottom: 20%; border-radius: 0 0 30px 30px;">
+            <div class="wall"></div>
+        <div class="container">
+            <div class="container1" style="flex: auto; flex-wrap: nowrap; width: 100%; justify-content: space-between;">
+                <div style="border: 2px red solid;">
+                    <img src="./images/bymannen.png" style="width: 100%; height: 80px;">
+                </div>
+                <div class="header" style="border: 2px red solid; width: auto;">
+                        <a href="./index.html" class="link">Start</a>
+                        <a href="./page1.html" class="link">Page one</a>
+                        <a href="./page2.html" class="link">Page two</a>
+                        <a href="./page3.html" class="link">Page three</a>
+                        <a href="./page4.html" class="link">Page four</a>
+                </div>
+                <div style="border: 2px red solid; width: 10%; min-width: 95px; max-width: 115px;">
+                    <button style="width: 100%; height: 60px; border-radius: 50px; font-size: 20px; font-weight: 500; background-color: white;">Res nu</button>
+                </div>
+            </div>
+            <h1 style="padding-top: 100px; padding-bottom: 75px;"></h1>
+        </div>
+        <div class="wall"></div>
+    </div>
+        
+   
+    <div class="one">
+        <div class="wall"></div>
+            <div class="container">
+                <div style="padding: 10% 10% 5% 10%;">
+                    <p style="font-size: 2.5vw; color: #1F2937; text-align: center;">
+                      "Jag får på mitt personliga sätt låta er se Kreta och livet här genom mina ögon."
+                    </p>
+                </div>
+            </div>
+        <div class="wall"></div>
+    </div>
+   
+
+    <div class="one">
+    <div class="wall"></div>
+    <div class="quote" style="padding-top: 10px;">
+        <div class="contact" style="padding: 4%; align-items: flex-end;">
+            <a href="./page4.html" style="font-size: 3vw; font-weight: 900;">Planera din resa</a>
+            
+            <a href="./page4.html" style="border: 2px solid white; padding: 5px 20px 5px 20px; font-weight: 700; border-radius: 12px;">Nu</a>
+        </div>
+    </div>
+    <div class="wall"></div>
+
+</div>
+        
+   
+
+<div class="scrollmenu">
+    <div class="product-card">
+        <div class="travel-card">
+  <img src="./images/2.jpg"  class="card-image"/>
+
+  <div class="card-content">
+    <h2>Sarakina & Zourva</h2>
+    <p>
+      Far its historic temples, cherry blossoms, and serene gardens.  
+      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
+    </p>
+
+    <button class="cta-btn">Book Now →</button>
+  </div>
+</div>
+</div>
+    <div class="product-card">
+        <div class="travel-card">
+  <img src="./images/komolithi.PNG" alt="Kyoto, Japan" class="card-image" />
+
+  <div class="card-content">
+    <h2>Komolithi</h2>
+    <p>
+      Far its historic temples, cherry blossoms, and serene gardens.  
+      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
+    </p>
+
+    <button class="cta-btn">Book Now →</button>
+  </div>
+</div>
+</div>
+    <div class="product-card">
+        <div class="travel-card">
+  <img src="./images/Falassarna.jpg" alt="Kyoto, Japan" class="card-image" />
+
+  <div class="card-content">
+    <h2>Falassarna</h2>
+    <p>
+      Far its historic temples, cherry blossoms, and serene gardens.  
+      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
+    </p>
+
+    <button class="cta-btn">Book Now →</button>
+  </div>
+</div>
+</div>
+    <div class="product-card">
+        <div class="travel-card">
+  <img src="./images/zourva.jpg" alt="Kyoto, Japan" class="card-image" />
+
+  <div class="card-content">
+    <h2>Zourva</h2>
+    <p>
+      Far its historic temples, cherry blossoms, and serene gardens.  
+      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
+    </p>
+
+    <button class="cta-btn">Book Now →</button>
+  </div>
+</div>
+</div>
+ <div class="product-card">
+        <div class="travel-card">
+  <img src="./images/ravdouxa.jpg"  class="card-image"/>
+
+  <div class="card-content">
+    <h2>Ravdouxa</h2>
+    <p>
+      Far its historic temples, cherry blossoms, and serene gardens.  
+      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
+    </p>
+
+    <button class="cta-btn">Book Now →</button>
+  </div>
+</div>
+</div>
+<div class="product-card">
+        <div class="travel-card">
+  <img src="#"  class="card-image"/>
+
+  <div class="card-content">
+    <h2>Kyoto, Japan</h2>
+    <p>
+      Far its historic temples, cherry blossoms, and serene gardens.  
+      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
+    </p>
+
+    <button class="cta-btn">Book Now →</button>
+  </div>
+</div>
+</div>
+   
+</div>
+
+
+    <div class="one">
+        <div class="wall"></div>
+        <div class="container2" style="gap: 14%; padding-bottom: 10%; padding-top: 10%;">
+            <div class="container" style="width: 43%; flex: auto; gap: 4%; height: 100%;">
+                
+                    <img src="./images/zourva.jpg" style="width: 100%; height: 38%; border-radius: 15px; aspect-ratio: 4/3;">
+                
+                <div style="border: 2px red solid; width: 100%; height: 20%;">
+                    <p style="font-size: 1.14vw;"> Donec ac erat condimentum, mattis mauris in, feugiat tortor. Vestibulum rutrum, lorem ac dignissim ultrices, dolor orci blandit sem, ac varius lacus nisi sed risus. Proin blandit neque ac laoreet elementum.<br><br> Nullam interdum vulputate tortor, a dapibus ipsum dapibus dignissim. Ut accumsan dictum sem, ut condimentum sem aliquam a. Aenean sed dapibus lacus. </p>
+                </div>
+                
+                    <img src="./images/Oceancity.png" style="width: 100%; height: 38%; border-radius: 15px; aspect-ratio: 4/3;">
+                
+            </div>
+            <div class="container" style="width: 43%; flex: auto; gap: 4%; height: 100%;">
+                <div style="border: 2px red solid; width: 100%; height: 29%;">
+                    <p style="font-size: 1.14vw;">
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce laoreet ante in fringilla ornare. Nam metus dui, tristique sed eros id, gravida porttitor quam. Etiam varius odio vel ultricies venenatis. Praesent sit amet mauris nec neque vestibulum laoreet quis vel lectus.<br><br> Vestibulum blandit, nisl id blandit convallis, ante augue lacinia magna, non consequat massa quam id arcu. Sed quis egestas lorem. Vivamus vehicula et ex at molestie.<br><br> Nullam lacinia erat non ligula bibendum tristique. Suspendisse vestibulum congue neque non tincidunt. Sed malesuada feugiat turpis, eget mattis nulla interdum eu. Maecenas pretium nulla sapien, in porttitor mi mollis quis. </p>
+                </div>
+                
+                    <img src="./images/Cave.png" style="width: 100%; height: 35%; border-radius: 15px; aspect-ratio: 4/3;">
+                
+                <div style="border: 2px red solid; width: 100%; height: 32%;">
+                    <p style="font-size: 1.14vw;">
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce laoreet ante in fringilla ornare. Nam metus dui, tristique sed eros id, gravida porttitor quam. Etiam varius odio vel ultricies venenatis. Praesent sit amet mauris nec neque vestibulum laoreet quis vel lectus.<br><br> Vestibulum blandit, nisl id blandit convallis, ante augue lacinia magna, non consequat massa quam id arcu. Sed quis egestas lorem. Vivamus vehicula et ex at molestie.<br><br> Nullam lacinia erat non ligula bibendum tristique. Suspendisse vestibulum congue neque non tincidunt. Sed malesuada feugiat turpis, eget mattis nulla interdum eu. Maecenas pretium nulla sapien, in porttitor mi mollis quis. </p>
+                </div>
+            </div>
+        </div>
+        <div class="wall"></div>
+    </div>
+
+
+
+    
+
+
+    <div class="one">
+        <div class="wall"></div>
+        <div class="container1" style="padding: 50px 50px 150px 50px;">
+            <div class="container1" style="flex: 0 1 auto; gap: 50px;">
+               <div class="container" style="flex: 0 1 auto; gap: 20px;">
+                    <div class="accordion">
+  <input type="checkbox" id="section1">
+  <label class="accordion-title" for="section1">Click to Expand</label>
+  <div class="accordion-content">
+    <p>
+      Here is the hidden information that appears when you click the bar.
+    </p>
+  </div>
+</div>
+
+                    
+                </div>
+                <div class="container" style="flex: 0 1 auto; gap: 20px;">
+                    <div class="accordion">
+  <input type="checkbox" id="section2">
+  <label class="accordion-title" for="section2">Click to Expand</label>
+  <div class="accordion-content">
+    <p>
+      Here is the hidden information that appears when you click the bar.
+    </p>
+  </div>
+</div>
+
+                    <div class="accordion">
+  <input type="checkbox" id="section3">
+  <label class="accordion-title" for="section3">Click to Expand</label>
+  <div class="accordion-content">
+    <p>
+      Here is the hidden information that appears when you click the bar.
+    </p>
+  </div>
+</div>
+
+                </div>
+                <div class="container" style="flex: 0 1 auto; gap: 20px;">
+                    <div class="accordion">
+  <input type="checkbox" id="section4">
+  <label class="accordion-title" for="section4">Click to Expand</label>
+  <div class="accordion-content">
+    <p>
+      Here is the hidden information that appears when you click the bar.
+    </p>
+  </div>
+</div>
+
+                    <div class="accordion">
+  <input type="checkbox" id="section5">
+  <label class="accordion-title" for="section5">Click to Expand</label>
+  <div class="accordion-content">
+    <p>
+      Here is the hidden information that appears when you click the bar.
+    </p>
+  </div>
+</div>
+
+                </div>
+           </div>
+        </div>
+        <div class="wall"></div>
+    </div>
+
+
+
+<div class="one">
+        <div class="wall"></div>
+        <div class="container1" style="padding: 50px 50px 150px 50px;">
+            <div class="container1" style="flex: auto; gap: 50px;">
+               <div class="container">
+                    <div class="accordion">
+  <input type="checkbox" id="section11">
+  <label class="accordion-title" for="section11">Click to Expand</label>
+  <div class="accordion-content">
+    <p>
+      Here is the hidden information that appears when you click the bar.
+    </p>
+  </div>
+</div>
+
+                    
+                
+                
+                    <div class="accordion">
+  <input type="checkbox" id="section6">
+  <label class="accordion-title" for="section6">Click to Expand</label>
+  <div class="accordion-content">
+    <p>
+      Here is the hidden information that appears when you click the bar.
+    </p>
+  </div>
+</div>
+
+                    <div class="accordion">
+  <input type="checkbox" id="section8">
+  <label class="accordion-title" for="section8">Click to Expand</label>
+  <div class="accordion-content">
+    <p>
+      Here is the hidden information that appears when you click the bar.
+    </p>
+  </div>
+</div>
+
+                
+                
+                    <div class="accordion">
+  <input type="checkbox" id="section9">
+  <label class="accordion-title" for="section9">Click to Expand</label>
+  <div class="accordion-content">
+    <p>
+      Here is the hidden information that appears when you click the bar.
+    </p>
+  </div>
+</div>
+
+                    <div class="accordion">
+  <input type="checkbox" id="section10">
+  <label class="accordion-title" for="section10">Click to Expand</label>
+  <div class="accordion-content">
+    <p>
+      Here is the hidden information that appears when you click the bar.
+    </p>
+  </div>
+</div>
+
+                </div>
+           </div>
+        </div>
+        <div class="wall"></div>
+    </div>
+
+
+
+
+    <div class="one" style="background-color: #1F2937;">
+        <div class="wall"></div>
+        <diV class="footernote">
+            <div>
+                <a href="#" class="link">Hello</a><p>Hello</p>
+            </div>
+            <div>
+                <a href="#" class="link">Hello</a><p>Hello</p>
+            </div>
+            <div>
+                <a href="#" class="link">Hello</a><p>Hello</p>
+            </div>
+        </diV>
+        <div class="wall"></div>
+    </div>
+</body>
+</html>
