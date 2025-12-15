@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+
+  .calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calendar-header button {
+  background: #e0e0e0;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.calendar-header button:hover {
+  background: #c8c8c8;
+}
+
+
+  #calendarPopup {
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 1%;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.hidden {
+  display: none;
+}
+
+.calendar {
+  width: 100%;
+  text-align: center;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.calendar-grid div {
+  padding: 2.3vh 0.5vw;
+  border-radius: 4px;
+  font-size: 0.91vw;
+}
+
+.available {
+  background: #e0f0ff;
+  cursor: pointer;
+}
+
+.available:hover {
+  background: #a9d4ff;
+}
+
+.unavailable {
+  color: #aaa;
+}
+
+
+  .carousel {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.main-image {
+  position: relative;
+}
+
+.main-image img {
+  width: 100%;
+  border-radius: 3%;
+  object-fit: cover;
+}
+
+.main-image button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  border: none;
+  color: white;
+  font-size: 24px;
+  padding: 2.3vh 0.8vw;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#prev { left: 2%; }
+#next { right: 2%; }
+
+.thumbnails {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 2%;
+}
+
+.thumbnails img {
+  width: 6.5vw;
+  height: 10vh;
+  object-fit: cover;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: 0.2s;
+}
+
+.thumbnails img.active,
+.thumbnails img:hover {
+  opacity: 1;
+  border: 2px solid #007bff;
+}
+
+
+    .travel-card {
+  width: 20vw;   /* width: clamp(50px, 26vw, 330px);    width: clamp(220px, 28vw, 330px); */
+  border-radius: clamp(10px, 2vw, 20px);
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", sans-serif;
+}
+
+.card-image {
+  width: 100%;
+  height: 12vw; /* height: clamp(120px, 16vw, 200px); */
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 1.13vw 1.25vw; /* padding: clamp(10px, 1.8vw, 18px) clamp(12px, 2vw, 20px); */
+}
+
+.card-content h2 {
+  font-size: 2vw;  /* font-size: clamp(1rem, 1.4vw, 1.4rem); */
+   margin: 0;/* margin: 0 0 clamp(6px, 1vw, 10px) 0; */
+  font-weight: 600;
+}
+
+.card-content p {
+  font-size: 1.2vw;  /* font-size: clamp(0.75rem, 1vw, 0.95rem); */
+  color: #555;
+  line-height: 1.4;
+  margin-bottom: 1vh; /* margin-bottom: clamp(12px, 1.6vw, 20px); */
+}
+
+.cta-btn {
+  padding: 1vw 1.8vw;  /* padding: clamp(8px, 1vw, 12px) clamp(14px, 1.8vw, 20px); */
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: clamp(16px, 2vw, 30px);
+  font-size: 1vw; /* font-size: clamp(.75rem, 1vw, 0.95rem); */
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cta-btn:hover {
+  background: #333;
+}
+
+.scrollmenu {
+  padding: 0 10%;
+  box-sizing: border-box;
+  display: flex;
+  gap: 3vw; /* gap: clamp(20px, 3vw, 45px); */
+  padding-bottom: 40px;
+  width: 100%;
+  height: fit-content;
+  white-space: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.product-card {
+  float: none;
+  display: inline-block;
+}
+
+/* hide scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}
+
+
+</style>
+     <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falassarna</title>
+</head>
+<body>
+
+  <script>
+    const Resa = "Falassarna";
+    let submitted;
+    if (submitted == true)
+    {
+      alert("hello");
+    }
+
+    else
+    {
+      submitted = false;
+    }
+  </script>
+
+    
+   <div class="one">
+        <div class="wall"></div>
+        <div class="">
+
+        </div>
+        <div class="wall"></div>
+   </div>
+
+
+   <div class="one">
+        <div class="wall"></div>
+        <div class="container1" style="padding: 6% 0 6% 0; width: 100%; gap: 5%;">
+            <div class="container" style="flex: 1 1 45%; align-self: flex-start;">
+               <div class="carousel">
+  <div class="main-image">
+    <button id="prev">❮</button>
+    <img id="currentImage" src="./images/1.jpg" alt="" style="aspect-ratio: 3/3;">
+    <button id="next">❯</button>
+  </div>
+
+  <div class="thumbnails">
+    <img class="thumb active" src="./images/1.jpg" data-index="0">
+    <img class="thumb" src="./images/2.jpg" data-index="1">
+    <img class="thumb" src="img3.jpg" data-index="2">
+    <img class="thumb" src="img4.jpg" data-index="3">
+  </div>
+</div>
+
+            </div>
+            <div class="container4" style="align-items: flex-start; flex: 1 1 45%; width: 100%; height: 100%;">
+                
+                <div style="width: 100%; flex: 1 1 auto; font-size: 2vw;">
+                  <h2 style="margin-top: 0; font-size: 2vw;">
+                      Falassarna
+                    </h2>
+                  <p style="font-size: 1.2vw;">
+                    Lindas specialare, en livsnjutartur utan dess like.....
+<br><br>
+En utflykt jag haft under många år med variationer.
+<br><br>
+Vi åker alltid till den oexploaterade, tysta delen av Falassarna stranden och njuter av sol/bad under förmiddags timmarna.....livet utan stress. Innan vi åker vidare tar vi kanske en liten aperetiv vid baren över stranden där vi samtidigt kan blicka ut över det öppna havet, bergen som omsluter oss och hela bukten av Falassarna!
+<br><br>
+Lagom till lunch åker vi upp på nya underbara bergsvägar till en ny traditionell taverna i bergen där vi äter en lunch av enbart typiska rätter från Chania/Kreta (ett tio-tal) garanterat nya smaker!
+<br><br>
+Vi fortsätter därefter, mätta & belåtna till vingården "Karavitakis" där vi kommer vinprova total 6 viner från lokala/internationella druvsorter.
+<br><br>
+START ca.09.00 HEM ca.17.30
+<br>
+Pris 70€/person
+<br>
+Vinprovning ingår
+<br>
+Mat tillkommer på ca. 16€/person för mat/dryck
+                  </p>
+                </div>
+                <div class="container1" style="gap: 10%; width: 100%; justify-content: space-between; flex: 1 1 auto;">
+                    <div style="flex: auto; height: 100%;">
+                        <button id="openCalendarBtn" style="width: 100%; height: 100%; border-radius: 2%;"></button>
+                        <div id="selectedDateDisplay"></div>
+                        <label for="openCalendarBtn" id="selectedDateDisplay"></label>
+
+<div id="calendarPopup" class="hidden">
+  <div class="calendar">
+    <div class="calendar-header">
+      <button id="prevMonth">❮</button>
+      <h3 id="monthLabel"></h3>
+      <button id="nextMonth">❯</button>
+    </div>
+
+    <div class="calendar-grid" id="calendarGrid"></div>
+  </div>
+</div>
+
+                    </div>
+                    <div style="flex: auto; height: 100%;">
+                        <form style="height: 100%;">
+                            <button style="width: 100%; height: 100%;"></button>
+                            <script>
+                              submitted = true;
+                            </script>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wall"></div>
+   </div>
+
+
+
+
+
+
+
+<div class="scrollmenu">
+    <div class="product-card">
+        <div class="travel-card">
+  <img src="./images/2.jpg"  class="card-image"/>
+
+  <div class="card-content">
+    <h2>Sarakina & Zourva</h2>
+    <p>
+      Far its historic temples, cherry blossoms, and serene gardens.  
+      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
+    </p>
+
+    <button class="cta-btn">Book Now →</button>
+  </div>
+</div>
+</div>
+    <div class="product-card">
+        <div class="travel-card">
+  <img src="./images/komolithi.PNG" alt="Kyoto, Japan" class="card-image" />
+
+  <div class="card-content">
+    <h2>Komolithi</h2>
+    <p>
+      Far its historic temples, cherry blossoms, and serene gardens.  
+      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
+    </p>
+
+    <button class="cta-btn">Book Now →</button>
+  </div>
+</div>
+</div>
+    <div class="product-card">
+        <div class="travel-card">
+  <img src="./images/Falassarna.jpg" alt="Kyoto, Japan" class="card-image" />
+
+  <div class="card-content">
+    <h2>Falassarna</h2>
+    <p>
+      Far its historic temples, cherry blossoms, and serene gardens.  
+      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
+    </p>
+
+    <button class="cta-btn">Book Now →</button>
+  </div>
+</div>
+</div>
+    <div class="product-card">
+        <div class="travel-card">
+  <img src="./images/zourva.jpg" alt="Kyoto, Japan" class="card-image" />
+
+  <div class="card-content">
+    <h2>Zourva</h2>
+    <p>
+      Far its historic temples, cherry blossoms, and serene gardens.  
+      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
+    </p>
+
+    <button class="cta-btn">Book Now →</button>
+  </div>
+</div>
+</div>
+ <div class="product-card">
+        <div class="travel-card">
+  <img src="./images/ravdouxa.jpg"  class="card-image"/>
+
+  <div class="card-content">
+    <h2>Ravdouxa</h2>
+    <p>
+      Far its historic temples, cherry blossoms, and serene gardens.  
+      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
+    </p>
+
+    <button class="cta-btn">Book Now →</button>
+  </div>
+</div>
+</div>
+<div class="product-card">
+        <div class="travel-card">
+  <img src="#"  class="card-image"/>
+
+  <div class="card-content">
+    <h2>Kyoto, Japan</h2>
+    <p>
+      Far its historic temples, cherry blossoms, and serene gardens.  
+      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
+    </p>
+
+    <button class="cta-btn">Book Now →</button>
+  </div>
+</div>
+</div>
+   
+</div>
+
+
+
+
+<div class="one" style="background-color: #1F2937;">
+    <div class="wall"></div>
+     <diV class="footernote">
+        <div>
+            <a href="#" class="link">Hello</a><p>Hello</p>
+        </div>
+        <div>
+            <a href="#" class="link">Hello</a><p>Hello</p>
+        </div>
+        <div>
+            <a href="#" class="link">Hello</a><p>Hello</p>
+        </div>
+    </diV>
+    <div class="wall"></div>
+</div>
+
+<script>
+  const images = ["./images/1.jpg", "./images/2.jpg", "./images/", "./images/"];
+
+let index = 0;
+const mainImg = document.getElementById("currentImage");
+const thumbnails = document.querySelectorAll(".thumb");
+
+function updateImage(newIndex) {
+  index = newIndex;
+  mainImg.src = images[index];
+
+  thumbnails.forEach(t => t.classList.remove("active"));
+  thumbnails[index].classList.add("active");
+}
+
+document.getElementById("prev").onclick = () => {
+  updateImage((index - 1 + images.length) % images.length);
+};
+
+document.getElementById("next").onclick = () => {
+  updateImage((index + 1) % images.length);
+};
+
+thumbnails.forEach((thumb, i) => {
+  thumb.onclick = () => updateImage(i);
+});
+
+</script>
+
+
+
+
+
+
+<script>
+// Example available dates
+const availableDates = [
+  "2025-01-10",
+  "2025-01-12",
+  "2025-01-17",
+  "2025-01-25",
+  "2025-02-02",
+  "2025-02-14",
+  "2025-03-05",
+  "2025-12-29",
+  "2026-01-08"
+];
+
+const openBtn = document.getElementById("openCalendarBtn");
+const calendarPopup = document.getElementById("calendarPopup");
+const calendarGrid = document.getElementById("calendarGrid");
+const monthLabel = document.getElementById("monthLabel");
+const selectedDisplay = document.getElementById("selectedDateDisplay");
+
+// Track displayed month
+let currentYear, currentMonth;
+
+// --- Generate Calendar ---
+function generateCalendar(year, month) {
+  calendarGrid.innerHTML = "";
+
+  currentYear = year;
+  currentMonth = month;
+
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+
+  monthLabel.textContent = firstDay.toLocaleString("default", {
+    month: "long",
+    year: "numeric"
+  });
+
+  // Blank cells until the first weekday
+  for (let i = 0; i < firstDay.getDay(); i++) {
+    calendarGrid.appendChild(document.createElement("div"));
+  }
+
+  // Fill calendar cells
+  for (let day = 1; day <= lastDay.getDate(); day++) {
+    const date = new Date(year, month, day);
+
+    // Manual safe formatting (fixes +1 bug)
+    const dateStr = [
+      date.getFullYear(),
+      String(date.getMonth() + 1).padStart(2, "0"),
+      String(date.getDate()).padStart(2, "0")
+    ].join("-");
+
+    const div = document.createElement("div");
+    div.textContent = day;
+
+    if (availableDates.includes(dateStr)) {
+      div.className = "available";
+      div.onclick = () => selectDate(dateStr);
+    } else {
+      div.className = "unavailable";
+    }
+
+    calendarGrid.appendChild(div);
+  }
+}
+
+// --- Select Date ---
+function selectDate(dateStr) {
+  selectedDisplay.textContent = "Selected Date: " + dateStr;
+  calendarPopup.classList.add("hidden");
+}
+
+// --- Open Calendar ---
+openBtn.onclick = () => {
+  calendarPopup.classList.toggle("hidden");
+
+  const now = new Date();
+  generateCalendar(now.getFullYear(), now.getMonth());
+};
+
+// --- Month Navigation Buttons ---
+document.getElementById("prevMonth").onclick = () => {
+  let month = currentMonth - 1;
+  let year = currentYear;
+
+  if (month < 0) {
+    month = 11;
+    year--;
+  }
+
+  generateCalendar(year, month);
+};
+
+document.getElementById("nextMonth").onclick = () => {
+  let month = currentMonth + 1;
+  let year = currentYear;
+
+  if (month > 11) {
+    month = 0;
+    year++;
+  }
+
+  generateCalendar(year, month);
+};
+
+
+</script>
+
+</body>
+</html>
