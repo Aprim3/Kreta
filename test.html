@@ -9,9 +9,9 @@
   }
 
   .accordion {
-  max-width: 500px;
+  
   width: 50%;
-  border: 1px solid #ccc;
+  border: 0.13em solid #ccc;
   border-radius: 6px;
   overflow: hidden;
   font-family: Arial, sans-serif;
@@ -22,9 +22,10 @@
   display: block;
   background: #1F2937;
   color: white;
-  padding: 12px;
+  padding: 2.9%;
   cursor: pointer;
   font-weight: bold;
+  font-size: 1.3vw;
 }
 
 /* Hide the checkbox */
@@ -47,9 +48,9 @@
   padding: 12px;
 }
 
-.travel-card {
-  width: 330px;
-  border-radius: 20px;
+  .travel-card {
+  width: 20vw;   /* width: clamp(50px, 26vw, 330px);    width: clamp(220px, 28vw, 330px); */
+  border-radius: clamp(10px, 2vw, 20px);
   overflow: hidden;
   background: #fff;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
@@ -58,35 +59,34 @@
 
 .card-image {
   width: 100%;
-  height: 200px;
+  height: 12vw; /* height: clamp(120px, 16vw, 200px); */
   object-fit: cover;
 }
 
 .card-content {
-  padding: 18px 20px;
-  
+  padding: 1.13vw 1.25vw; /* padding: clamp(10px, 1.8vw, 18px) clamp(12px, 2vw, 20px); */
 }
 
 .card-content h2 {
-  font-size: 1.4rem;
-  margin: 0 0 10px 0;
+  font-size: 2vw;  /* font-size: clamp(1rem, 1.4vw, 1.4rem); */
+   margin: 0;/* margin: 0 0 clamp(6px, 1vw, 10px) 0; */
   font-weight: 600;
 }
 
 .card-content p {
-  font-size: 0.95rem;
+  font-size: 1.2vw;  /* font-size: clamp(0.75rem, 1vw, 0.95rem); */
   color: #555;
   line-height: 1.4;
-  margin-bottom: 20px;
+  margin-bottom: 1vh; /* margin-bottom: clamp(12px, 1.6vw, 20px); */
 }
 
 .cta-btn {
-  padding: 12px 20px;
+  padding: 1vw 1.8vw;  /* padding: clamp(8px, 1vw, 12px) clamp(14px, 1.8vw, 20px); */
   background: #000;
   color: #fff;
   border: none;
-  border-radius: 30px;
-  font-size: 0.95rem;
+  border-radius: clamp(16px, 2vw, 30px);
+  font-size: 1vw; /* font-size: clamp(.75rem, 1vw, 0.95rem); */
   cursor: pointer;
   transition: 0.2s ease;
 }
@@ -96,24 +96,28 @@
 }
 
 .scrollmenu {
-    display: flex;
-    gap: 45px;
-    padding: 0 10% 40px 10%;
-    width: 100%;
-    height: fit-content;
-    /**used to scroll text*/
-    white-space: nowrap;    
-    overflow-x: scroll;
-    overflow-y: hidden;    /**keep scrolling when
-      *finger or cursor scrolling*/
-    -webkit-overflow-scrolling: touch; 
-}.product-card {
-    background-color: red;
-    float: none;
-    display: inline-block;
-}/*to hide the scrollbars*/
+  padding: 0 10%;
+  box-sizing: border-box;
+  display: flex;
+  gap: 3vw; /* gap: clamp(20px, 3vw, 45px); */
+  padding-bottom: 40px;
+  width: 100%;
+  height: fit-content;
+  white-space: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 7%;
+}
+
+.product-card {
+  float: none;
+  display: inline-block;
+}
+
+/* hide scrollbar */
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
     </style>
@@ -170,10 +174,10 @@
     <div class="one">
     <div class="wall"></div>
     <div class="quote" style="padding: 10px 0 7% 0;">
-        <div class="contact" style="padding: 4%; align-items: flex-end;">
+        <div class="contact" style="padding: 3%; gap: 1.5vw;">
             <a href="./page4.html" style="font-size: 3vw; font-weight: 900;">Planera din resa</a>
             
-            <a href="./page4.html" style="border: 2px solid white; padding: 5px 20px 5px 20px; font-weight: 700; border-radius: 12px;">Nu</a>
+            <a href="./page4.html" style="border: 2px solid white; padding: 0.31vw 1.25vw; font-weight: 700; border-radius: 12px; font-size: 3vw;">Nu</a>
         </div>
     </div>
     <div class="wall"></div>
@@ -282,13 +286,13 @@
         <div class="container2" style="gap: 14%; padding-bottom: 10%; padding-top: 10%;">
             <div class="container" style="width: 43%; flex: auto; gap: 4%; height: 100%;">
                 
-                    <img src="./images/zourva.jpg" style="width: 100%; height: 38%; border-radius: 15px; aspect-ratio: 4/3;">
+                    <img src="./images/zourva.jpg" style="width: 100%; height: 38%; border-radius: 1em; aspect-ratio: 4/3;">
                 
                 <div style="border: 2px red solid; width: 100%; height: 20%;">
                     <p style="font-size: 1.14vw;"> Donec ac erat condimentum, mattis mauris in, feugiat tortor. Vestibulum rutrum, lorem ac dignissim ultrices, dolor orci blandit sem, ac varius lacus nisi sed risus. Proin blandit neque ac laoreet elementum.<br><br> Nullam interdum vulputate tortor, a dapibus ipsum dapibus dignissim. Ut accumsan dictum sem, ut condimentum sem aliquam a. Aenean sed dapibus lacus. </p>
                 </div>
                 
-                    <img src="./images/Oceancity.png" style="width: 100%; height: 38%; border-radius: 15px; aspect-ratio: 4/3;">
+                    <img src="./images/Oceancity.png" style="width: 100%; height: 38%; border-radius: 1em; aspect-ratio: 4/3;">
                 
             </div>
             <div class="container" style="width: 43%; flex: auto; gap: 4%; height: 100%;">
@@ -298,7 +302,7 @@
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce laoreet ante in fringilla ornare. Nam metus dui, tristique sed eros id, gravida porttitor quam. Etiam varius odio vel ultricies venenatis. Praesent sit amet mauris nec neque vestibulum laoreet quis vel lectus.<br><br> Vestibulum blandit, nisl id blandit convallis, ante augue lacinia magna, non consequat massa quam id arcu. Sed quis egestas lorem. Vivamus vehicula et ex at molestie.<br><br> Nullam lacinia erat non ligula bibendum tristique. Suspendisse vestibulum congue neque non tincidunt. Sed malesuada feugiat turpis, eget mattis nulla interdum eu. Maecenas pretium nulla sapien, in porttitor mi mollis quis. </p>
                 </div>
                 
-                    <img src="./images/Cave.png" style="width: 100%; height: 35%; border-radius: 15px; aspect-ratio: 4/3;">
+                    <img src="./images/Cave.png" style="width: 100%; height: 35%; border-radius: 1em; aspect-ratio: 4/3;">
                 
                 <div style="border: 2px red solid; width: 100%; height: 32%;">
                     <p style="font-size: 1.14vw;">
@@ -315,79 +319,15 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce laoreet ante in f
     
 
 
-    <div class="one">
-        <div class="wall"></div>
-        <div class="container1" style="padding: 50px 50px 150px 50px;">
-            <div class="container1" style="flex: 0 1 auto; gap: 50px;">
-               <div class="container" style="flex: 0 1 auto; gap: 20px;">
-                    <div class="accordion">
-  <input type="checkbox" id="section1">
-  <label class="accordion-title" for="section1">Click to Expand</label>
-  <div class="accordion-content">
-    <p>
-      Here is the hidden information that appears when you click the bar.
-    </p>
-  </div>
-</div>
-
-                    
-                </div>
-                <div class="container" style="flex: 0 1 auto; gap: 20px;">
-                    <div class="accordion">
-  <input type="checkbox" id="section2">
-  <label class="accordion-title" for="section2">Click to Expand</label>
-  <div class="accordion-content">
-    <p>
-      Here is the hidden information that appears when you click the bar.
-    </p>
-  </div>
-</div>
-
-                    <div class="accordion">
-  <input type="checkbox" id="section3">
-  <label class="accordion-title" for="section3">Click to Expand</label>
-  <div class="accordion-content">
-    <p>
-      Here is the hidden information that appears when you click the bar.
-    </p>
-  </div>
-</div>
-
-                </div>
-                <div class="container" style="flex: 0 1 auto; gap: 20px;">
-                    <div class="accordion">
-  <input type="checkbox" id="section4">
-  <label class="accordion-title" for="section4">Click to Expand</label>
-  <div class="accordion-content">
-    <p>
-      Here is the hidden information that appears when you click the bar.
-    </p>
-  </div>
-</div>
-
-                    <div class="accordion">
-  <input type="checkbox" id="section5">
-  <label class="accordion-title" for="section5">Click to Expand</label>
-  <div class="accordion-content">
-    <p>
-      Here is the hidden information that appears when you click the bar.
-    </p>
-  </div>
-</div>
-
-                </div>
-           </div>
-        </div>
-        <div class="wall"></div>
-    </div>
+    
 
 
 
 <div class="one">
         <div class="wall"></div>
-        <div class="container1" style="padding: 50px 50px 150px 50px;">
-            <div class="container1" style="flex: auto; gap: 50px;">
-               <div class="container">
+        <div class="container1" style="padding: 2% 4% 10% 4%;">
+            <div class="container1" style="flex: auto;">
+               <div class="container" style="gap: 0.5vh;">
                     <div class="accordion">
   <input type="checkbox" id="section11">
   <label class="accordion-title" for="section11">Click to Expand</label>
