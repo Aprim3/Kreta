@@ -2,6 +2,79 @@
 <html lang="en">
 <head>
 <style>
+  /********************* Email form*/
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay.active {
+  display: flex;
+}
+
+.popup {
+  background: white;
+  padding: 0 2vw;
+  width: fit-content;
+ /* max-width: 400px;*/
+  border-radius: 8px;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+
+
+  .Email-form
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2em 0 5em 0;
+  }
+  
+  .field {
+  margin-bottom: 10px;
+}
+
+.field label {
+  display: block;
+  font-size: 1.3vw; 
+  color: #777;
+}
+
+.field input {
+  display: block;
+  min-width: 250px;
+  line-height: 1.5;
+  font-size: 1.2vw;
+  width: 30vw;
+}
+
+input[type="submit"] {
+  display: block;
+  width: 40%;
+  padding: 0.63vw;
+  font-size: 14px;
+  background-color: #4460AA;
+  color: #fff;
+  border: none
+}
+
+  /*********************************/
 
   .calendar-header {
   display: flex;
@@ -207,20 +280,7 @@
 </head>
 <body>
 
-  <script>
-    const Resa = "Sarakina&Zourva";
-    let submitted;
-    if (submitted == true)
-    {
-      prompt("hello");
-    }
-
-    else
-    {
-      submitted = false;
-    }
-  </script>
-
+ 
     
    <div class="one">
         <div class="wall"></div>
@@ -278,31 +338,9 @@ Mat tillkommer på ca. 16€/person för mat/dryck
                   </p>
                 </div>
                 <div class="container1" style="gap: 10%; width: 100%; justify-content: space-between; flex: 1 1 auto;">
+                    
                     <div style="flex: auto; height: 100%; width: 40%;">
-                        <button id="openCalendarBtn" style="width: 100%; height: 100%; border-radius: 2%;"></button>
-                        <div id="selectedDateDisplay"></div>
-                        <label for="openCalendarBtn" id="selectedDateDisplay"></label>
-
-<div id="calendarPopup" class="hidden">
-  <div class="calendar">
-    <div class="calendar-header">
-      <button id="prevMonth">❮</button>
-      <h3 id="monthLabel"></h3>
-      <button id="nextMonth">❯</button>
-    </div>
-
-    <div class="calendar-grid" id="calendarGrid"></div>
-  </div>
-</div>
-
-                    </div>
-                    <div style="flex: auto; height: 100%; width: 40%;">
-                        <form style="height: 100%;">
-                            <button style="width: 100%; height: 100%;"></button>
-                            <script>
-                              submitted = true;
-                            </script>
-                        </form>
+                        <button id="openFormBtn" style="width: 100%; height: 100%;">Contact Us</button>
                     </div>
                 </div>
             </div>
@@ -310,11 +348,132 @@ Mat tillkommer på ca. 16€/person för mat/dryck
         <div class="wall"></div>
    </div>
 
+<!---------------------------------- Email form -->
+<!--
+<div class="one">
+  <div class="wall"></div>
+  <div class="container">
+
+<form class="Email-form" id="form">
+  <div class="field">
+    <label for="Resa">Resa*</label>
+    <input type="text" name="Resa" id="Resa" required>
+  </div>
+  <div class="field">
+    <label for="email">email*</label>
+    <input type="text" name="email" id="email" required>
+  </div>
+  <div class="field">
+    <label for="name">name*</label>
+    <input type="text" name="name" id="name" required>
+  </div>
+  <div class="field" style="width: 100%;">
+    <label for="message">message</label>
+    <textarea
+  name="message"
+  rows="5"
+  placeholder="Your message"
+  required
+  style="resize: none; width: 100%; font-size: 1.5vw;"
+ ></textarea>
+  </div>
+  <div class="field">
+    <label for="Nummber">Nummber*</label>
+    <input type="text" name="Nummber" id="Nummber" required>
+  </div>
+  <div class="field">
+    <label for="Personer">Personer*</label>
+    <input type="text" name="Personer" id="Personer" required>
+  </div>
+
+  <input type="submit" id="button" value="Send Email" >
+</form>
+
+<script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script type="text/javascript">
+  emailjs.init('n7qxqiKruT-IcJA90')
+</script>
+</div>
+<div class="wall"></div>
+</div>
+
+-->
 
 
 
 
 
+<div id="formOverlay" class="overlay">
+  <div class="popup">
+
+     <button id="closeFormBtn" class="close">×</button>
+    <form class="Email-form" id="form">
+      <label style="align-self: flex-start;">Välj datum</label>
+      <div style="flex: auto; height: 100%; width: 40%; align-self: flex-start; margin-bottom: 10px;">
+                        <button type="button" id="openCalendarBtn" style="width: 30vw; height: 2vw; border-radius: 2%;"></button>
+                        <!-- Visible text -->
+<div id="selectedDateText"></div>
+
+<!-- Hidden field sent to EmailJS -->
+<input type="hidden" name="selected_date" id="selectedDateInput">
+
+
+<div id="calendarPopup" class="hidden">
+  <div class="calendar">
+    <div class="calendar-header">
+      <button type="button" id="prevMonth">❮</button>
+      <h3 id="monthLabel"></h3>
+      <button type="button" id="nextMonth">❯</button>
+    </div>
+
+    <div class="calendar-grid" id="calendarGrid"></div>
+  </div>
+</div>
+
+                    </div>
+  
+  <div class="field">
+    <label for="email">email*</label>
+    <input type="text" name="email" id="email" required>
+  </div>
+  <div class="field">
+    <label for="name">name*</label>
+    <input type="text" name="name" id="name" required>
+  </div>
+  <div class="field">
+    <label for="message">message</label>
+    <textarea
+  name="message"
+  rows="5"
+  placeholder="Your message"
+  required
+  style="resize: none; width: 30vw; font-size: 1.5vw;"
+ ></textarea>
+  </div>
+  <div class="field">
+    <label for="Nummber">Nummber*</label>
+    <input type="text" name="Nummber" id="Nummber" required>
+  </div>
+  <div class="field">
+    <label for="Personer">Personer*</label>
+    <input type="text" name="Personer" id="Personer" required>
+  </div>
+
+  <input type="submit" id="button" value="Send Email" >
+</form>
+    <script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script type="text/javascript">
+  emailjs.init('n7qxqiKruT-IcJA90')
+</script>
+  </div>
+</div>
+
+
+<!------------------------------------------------>
 
 <div class="scrollmenu">
     <div class="product-card">
@@ -533,9 +692,17 @@ function generateCalendar(year, month) {
 
 // --- Select Date ---
 function selectDate(dateStr) {
-  selectedDisplay.textContent = "Selected Date: " + dateStr;
+  const displayText = `Selected Date: ${dateStr}  Resa: Sarakina & Zourva`;
+
+  // Show on screen
+  document.getElementById("selectedDateText").textContent = displayText;
+
+  // Store for EmailJS
+  document.getElementById("selectedDateInput").value = displayText;
+
   calendarPopup.classList.add("hidden");
 }
+
 
 // --- Open Calendar ---
 openBtn.onclick = () => {
@@ -572,6 +739,51 @@ document.getElementById("nextMonth").onclick = () => {
 
 
 </script>
+  <!--------------------------------------------------- Email form --> 
+  <script>
+    const btn = document.getElementById('button');
 
+document.getElementById('form')
+ .addEventListener('submit', function(event) {
+   event.preventDefault();
+
+   btn.value = 'Sending...';
+
+   const serviceID = 'default_service';
+   const templateID = 'template_yl0fvpd';
+
+   emailjs.sendForm(serviceID, templateID, this)
+    .then(() => {
+      btn.value = 'Send Email';
+      alert('Sent!');
+    }, (err) => {
+      btn.value = 'Send Email';
+      alert(JSON.stringify(err));
+    });
+});
+
+
+  </script>
+  
+<script>
+  const overlay = document.getElementById("formOverlay");
+
+document.getElementById("openFormBtn").onclick = () => {
+  overlay.classList.add("active");
+};
+
+document.getElementById("closeFormBtn").onclick = () => {
+  overlay.classList.remove("active");
+};
+
+// Close when clicking outside the popup
+overlay.addEventListener("click", (e) => {
+  if (e.target === overlay) {
+    overlay.classList.remove("active");
+  }
+});
+
+</script>
+  
 </body>
 </html>
