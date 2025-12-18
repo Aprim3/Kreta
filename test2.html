@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Falassarna – Mediterranean Experience</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --sand:#FAF7F2;
+  --sea:#2F6F8F;
+  --sea-light:#E6F2F7;
+  --olive:#7A8F5B;
+  --text-dark:#1F2937;
+  --text-soft:#555;
+}
+
+body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:var(--sand);
+  color:var(--text-dark);
+}
+
+h1,h2,h3{font-family:"Playfair Display",serif;}
+p{line-height:1.7;color:var(--text-soft);}
+
+.page-section{
+  max-width:1200px;
+  margin:auto;
+  padding:4rem 1.5rem;
+}
+
+/* CAROUSEL */
+.carousel{border-radius:20px;overflow:hidden;}
+.main-image{position:relative;aspect-ratio:1/1;}
+.main-image img{width:100%;height:100%;object-fit:cover;}
+.main-image button{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(47,111,143,.7);
+  border:none;color:#fff;
+  font-size:2rem;border-radius:50%;
+  padding:.4rem .7rem;cursor:pointer;
+}
+#prev{left:10px;} #next{right:10px;}
+
+/* TEXT */
+.trip-title{font-size:clamp(2rem,3vw,2.6rem);margin-top:0;}
+.trip-meta{color:var(--olive);margin:1rem 0;}
+
+/* BUTTON */
+.primary-btn{
+  background:var(--sea);
+  color:#fff;border:none;border-radius:999px;
+  padding:.9rem 2.2rem;font-size:1rem;cursor:pointer;
+}
+.primary-btn:hover{background:#24566f;}
+
+/* POPUP */
+.overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.6);
+  justify-content:center;align-items:center;z-index:1000;
+}
+.overlay.active{display:flex;}
+
+.popup{
+  background:#fff;border-radius:20px;
+  padding:2rem;max-width:540px;width:90%;
+  position:relative;
+}
+
+.close{
+  position:absolute;top:14px;right:16px;
+  font-size:1.5rem;background:none;border:none;cursor:pointer;
+}
+
+/* FORM */
+.Email-form{
+  display:flex;flex-direction:column;gap:.8rem;
+}
+.Email-form label{
+  font-size:.8rem;text-transform:uppercase;
+  letter-spacing:.05em;color:var(--olive);
+}
+.Email-form input,
+.Email-form textarea{
+  padding:.7rem;border-radius:10px;
+  border:1px solid #ddd;font-size:1rem;
+}
+.Email-form input:focus,
+.Email-form textarea:focus{
+  outline:none;border-color:var(--sea);
+}
+
+/* CALENDAR */
+#calendarPopup{
+  background:#fff;border-radius:16px;
+  padding:1rem;margin-bottom:1rem;
+}
+.calendar-header{
+  display:flex;justify-content:space-between;align-items:center;
+}
+.calendar-grid{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  gap:6px;margin-top:10px;
+}
+.calendar-grid div{
+  padding:.6rem;border-radius:8px;font-size:.9rem;
+}
+.available{
+  background:var(--sea-light);
+  color:var(--sea);font-weight:600;cursor:pointer;
+}
+.available:hover{background:var(--sea);color:#fff;}
+.unavailable{color:#aaa;}
+.hidden{display:none;}
+
+/* SCROLL CARDS */
+.scrollmenu{
+  display:flex;gap:2rem;overflow-x:auto;padding:2rem;
+}
+.travel-card{
+  flex:0 0 260px;background:#fff;border-radius:18px;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
+.card-image{width:100%;height:180px;object-fit:cover;}
+.card-content{padding:1.2rem;}
+.cta-btn{
+  background:var(--olive);border:none;border-radius:999px;
+  color:#fff;padding:.6rem 1.6rem;cursor:pointer;
+}
+
+/* FOOTER */
+footer{
+  background:linear-gradient(180deg,#1F2937,#0f172a);
+  color:#fff;text-align:center;padding:2rem;
+}
+</style>
+</head>
+
+<body>
+
+<section class="page-section">
+  <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+    
+    <!-- Carousel -->
+    <div style="flex:1 1 400px;">
+      <div class="carousel">
+        <div class="main-image">
+          <button id="prev">❮</button>
+          <img id="currentImage" src="./images/1.jpg">
+          <button id="next">❯</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Text -->
+    <div style="flex:1 1 400px;">
+      <h2 class="trip-title">Falassarna</h2>
+      <div class="trip-meta">
+        ⏰ 09:00–17:30 · 🍷 Wine tasting included · €70/person
+      </div>
+
+      <p>
+        Lindas specialare – en livsnjutartur utan dess like.
+        En utflykt jag haft under många år med variationer.
+      </p>
+
+      <p>
+        Vi åker alltid till den oexploaterade, tysta delen av Falassarna stranden
+        och njuter av sol och bad under förmiddagen – livet utan stress.
+      </p>
+
+      <p>
+        Innan vi åker vidare tar vi kanske en liten aperitif vid baren ovanför stranden
+        där vi blickar ut över det öppna havet, bergen och hela bukten.
+      </p>
+
+      <p>
+        Lagom till lunch åker vi upp på nya bergsvägar till en traditionell taverna
+        där vi äter typiska rätter från Chania/Kreta – garanterat nya smaker.
+      </p>
+
+      <p>
+        Dagen avslutas på vingården <strong>Karavitakis</strong> med vinprovning
+        av 6 lokala och internationella viner.
+      </p>
+
+      <button id="openFormBtn" class="primary-btn">
+        Book this experience
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- POPUP FORM -->
+<div id="formOverlay" class="overlay">
+  <div class="popup">
+    <button id="closeFormBtn" class="close">×</button>
+
+    <form class="Email-form" id="form">
+
+      <label>Select date</label>
+      <button type="button" id="openCalendarBtn" class="primary-btn">
+        Choose date
+      </button>
+      <div id="selectedDateText"></div>
+      <input type="hidden" name="selected_date" id="selectedDateInput">
+
+      <div id="calendarPopup" class="hidden">
+        <div class="calendar-header">
+          <button type="button" id="prevMonth">❮</button>
+          <h3 id="monthLabel"></h3>
+          <button type="button" id="nextMonth">❯</button>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+      </div>
+
+      <label>Email</label>
+      <input type="email" name="email" required>
+
+      <label>Name</label>
+      <input type="text" name="name" required>
+
+      <label>Mobile number</label>
+      <input type="text" name="number" required>
+
+      <label>Number of people</label>
+      <input type="number" name="people" min="1" required>
+
+      <label>Message</label>
+      <textarea name="message" rows="4"></textarea>
+
+      <input type="submit" id="button" class="primary-btn" value="Send request">
+    </form>
+  </div>
+</div>
+
+<!-- SCROLL CARDS -->
+<div class="scrollmenu">
+
+  <div class="travel-card">
+    <img src="./images/zourva.jpg" class="card-image">
+    <div class="card-content">
+      <h2>Zourva</h2>
+      <button class="cta-btn">Explore</button>
+    </div>
+  </div>
+
+  <div class="travel-card">
+    <img src="./images/Falassarna.jpg" class="card-image">
+    <div class="card-content">
+      <h2>Falassarna</h2>
+      <button class="cta-btn">Explore</button>
+    </div>
+  </div>
+
+  <div class="travel-card">
+    <img src="./images/2.jpg" class="card-image">
+    <div class="card-content">
+      <h2>Sarakina</h2>
+      <button class="cta-btn">Explore</button>
+    </div>
+  </div>
+
+  <div class="travel-card">
+    <img src="./images/ravdouxa.jpg" class="card-image">
+    <div class="card-content">
+      <h2>Ravdouxa</h2>
+      <button class="cta-btn">Explore</button>
+    </div>
+  </div>
+
+  <div class="travel-card">
+    <img src="./images/komolithi.PNG" class="card-image">
+    <div class="card-content">
+      <h2>Komolithi</h2>
+      <button class="cta-btn">Explore</button>
+    </div>
+  </div>
+
+</div>
+
+
+<footer>© Mediterranean Experiences – Crete</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+emailjs.init("n7qxqiKruT-IcJA90");
+
+/* Carousel */
+const images=["./images/1.jpg","./images/2.jpg","./images/3.jpg"];
+let index=0;
+const img=document.getElementById("currentImage");
+prev.onclick=()=>{index=(index-1+images.length)%images.length;img.src=images[index];};
+next.onclick=()=>{index=(index+1)%images.length;img.src=images[index];};
+
+/* Popup */
+const overlay=document.getElementById("formOverlay");
+openFormBtn.onclick=()=>overlay.classList.add("active");
+closeFormBtn.onclick=()=>overlay.classList.remove("active");
+overlay.onclick=e=>{if(e.target===overlay)overlay.classList.remove("active");};
+
+/* Email */
+form.addEventListener("submit",e=>{
+  e.preventDefault();
+  emailjs.sendForm("default_service","template_yl0fvpd",form)
+    .then(()=>alert("Sent!"),err=>alert(JSON.stringify(err)));
+});
+
+/* Calendar */
+const availableDates=["2025-01-10","2025-01-17","2025-02-14"];
+let currentYear,currentMonth;
+
+function generateCalendar(y,m){
+  calendarGrid.innerHTML="";
+  currentYear=y;currentMonth=m;
+  const first=new Date(y,m,1);
+  const last=new Date(y,m+1,0);
+  monthLabel.textContent=first.toLocaleString("default",{month:"long",year:"numeric"});
+  for(let i=0;i<first.getDay();i++)calendarGrid.appendChild(document.createElement("div"));
+  for(let d=1;d<=last.getDate();d++){
+    const s=`${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+    const div=document.createElement("div");
+    div.textContent=d;
+    if(availableDates.includes(s)){
+      div.className="available";
+      div.onclick=()=>selectDate(s);
+    }else div.className="unavailable";
+    calendarGrid.appendChild(div);
+  }
+}
+
+function selectDate(s){
+  selectedDateText.textContent="Selected date: "+s;
+  selectedDateInput.value=s;
+  calendarPopup.classList.add("hidden");
+}
+
+openCalendarBtn.onclick=()=>{
+  calendarPopup.classList.toggle("hidden");
+  const now=new Date();
+  generateCalendar(now.getFullYear(),now.getMonth());
+};
+
+prevMonth.onclick=()=>generateCalendar(currentYear,currentMonth-1<0?11:currentMonth-1,currentMonth-1<0?currentYear-1:currentYear);
+nextMonth.onclick=()=>generateCalendar(currentYear,currentMonth+1>11?0:currentMonth+1,currentMonth+1>11?currentYear+1:currentYear);
+</script>
+
+</body>
+</html>
