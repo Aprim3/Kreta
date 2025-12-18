@@ -119,18 +119,58 @@ p{line-height:1.7;color:var(--text-soft);}
 .hidden{display:none;}
 
 /* SCROLL CARDS */
-.scrollmenu{
-  display:flex;gap:2rem;overflow-x:auto;padding:2rem;
+.scrollmenu {
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  overflow-x: auto;
+  padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+  scroll-snap-type: x mandatory;
 }
-.travel-card{
-  flex:0 0 260px;background:#fff;border-radius:18px;
-  box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+.travel-card {
+  flex: 0 0 clamp(260px, 20vw, 300px);
+  scroll-snap-align: start;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
 }
+
+.card-content p {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  margin: 0.4rem 0 0.8rem;
+}
+
+.card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: #eee; /* fallback */
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+}
+
+
 .card-image{width:100%;height:180px;object-fit:cover;}
 .card-content{padding:1.2rem;}
-.cta-btn{
-  background:var(--olive);border:none;border-radius:999px;
-  color:#fff;padding:.6rem 1.6rem;cursor:pointer;
+
+.cta-btn {
+  display: inline-block;       /* behaves like a button */
+  text-decoration: none;       /* remove underline */
+  background: var(--olive);
+  border: none;
+  border-radius: 999px;
+  color: #fff;
+  padding: .6rem 1.6rem;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  transition: background 0.3s;
+}
+
+
+.cta-btn:hover {
+  background: #5f7245; /* slightly darker olive for hover */
 }
 
 /* FOOTER */
@@ -161,7 +201,7 @@ footer{
     <div style="flex:1 1 400px;">
       <h2 class="trip-title">Falassarna</h2>
       <div class="trip-meta">
-        ⏰ 09:00–17:30 · 🍷 Wine tasting included · €70/person
+        ⏰ 09:00–17:30 · 🍷 Wine tasting included · €70/person  <br>Mat tillkommer på ca. 16€/person för mat/dryck
       </div>
 
       <p>
@@ -208,7 +248,7 @@ footer{
         Choose date
       </button>
       <div id="selectedDateText"></div>
-      <input type="hidden" name="selected_date" id="selectedDateInput">
+      <input type="hidden" name="selected_date" id="selectedDateInput" required autocomplete="off">
 
       <div id="calendarPopup" class="hidden">
         <div class="calendar-header">
@@ -226,10 +266,10 @@ footer{
       <input type="text" name="name" required>
 
       <label>Mobile number</label>
-      <input type="text" name="number" required>
+      <input type="text" name="Nummber" required>
 
       <label>Number of people</label>
-      <input type="number" name="people" min="1" required>
+      <input type="number" name="Personer" min="1" required>
 
       <label>Message</label>
       <textarea name="message" rows="4"></textarea>
@@ -246,7 +286,8 @@ footer{
     <img src="./images/zourva.jpg" class="card-image">
     <div class="card-content">
       <h2>Zourva</h2>
-      <button class="cta-btn">Explore</button>
+      <p>Mountain village & traditional lunch</p>
+      <a href="zourva.html" class="cta-btn">Explore</a>
     </div>
   </div>
 
@@ -254,7 +295,8 @@ footer{
     <img src="./images/Falassarna.jpg" class="card-image">
     <div class="card-content">
       <h2>Falassarna</h2>
-      <button class="cta-btn">Explore</button>
+      <p>Golden beach & wine tasting</p>
+      <a href="zourva.html" class="cta-btn">Explore</a>
     </div>
   </div>
 
@@ -262,7 +304,8 @@ footer{
     <img src="./images/2.jpg" class="card-image">
     <div class="card-content">
       <h2>Sarakina</h2>
-      <button class="cta-btn">Explore</button>
+      <p>Gorge walk & nature escape</p>
+      <a href="zourva.html" class="cta-btn">Explore</a>
     </div>
   </div>
 
@@ -270,7 +313,8 @@ footer{
     <img src="./images/ravdouxa.jpg" class="card-image">
     <div class="card-content">
       <h2>Ravdouxa</h2>
-      <button class="cta-btn">Explore</button>
+      <p>Secluded coast & crystal water</p>
+      <a href="zourva.html" class="cta-btn">Explore</a>
     </div>
   </div>
 
@@ -278,7 +322,8 @@ footer{
     <img src="./images/komolithi.PNG" class="card-image">
     <div class="card-content">
       <h2>Komolithi</h2>
-      <button class="cta-btn">Explore</button>
+      <p>Unique clay formations</p>
+      <a href="zourva.html" class="cta-btn">Explore</a>
     </div>
   </div>
 
@@ -306,10 +351,35 @@ closeFormBtn.onclick=()=>overlay.classList.remove("active");
 overlay.onclick=e=>{if(e.target===overlay)overlay.classList.remove("active");};
 
 /* Email */
-form.addEventListener("submit",e=>{
-  e.preventDefault();
-  emailjs.sendForm("default_service","template_yl0fvpd",form)
-    .then(()=>alert("Sent!"),err=>alert(JSON.stringify(err)));
+form.addEventListener("submit", e => {
+  e.preventDefault(); // Stop normal submission
+
+  const dateInput = document.getElementById("selectedDateInput");
+  const btn = document.getElementById("button");
+
+  // Custom validation for the date
+  if (!dateInput.value) {
+    alert("Please select a date before sending!");
+    return; // Stop sending if no date
+  }
+
+  btn.value = 'Sending...';
+
+  const serviceID = 'default_service';
+  const templateID = 'template_yl0fvpd';
+
+  emailjs.sendForm(serviceID, templateID, form)
+    .then(() => {
+      btn.value = 'Send request';
+      alert('Sent!');
+      form.reset(); // clear all fields
+      document.getElementById("selectedDateText").textContent = "";
+      dateInput.value = "";
+    })
+    .catch((err) => {
+      btn.value = 'Send request';
+      alert(JSON.stringify(err));
+    });
 });
 
 /* Calendar */
@@ -349,6 +419,16 @@ openCalendarBtn.onclick=()=>{
 
 prevMonth.onclick=()=>generateCalendar(currentYear,currentMonth-1<0?11:currentMonth-1,currentMonth-1<0?currentYear-1:currentYear);
 nextMonth.onclick=()=>generateCalendar(currentYear,currentMonth+1>11?0:currentMonth+1,currentMonth+1>11?currentYear+1:currentYear);
+</script>
+
+<script>
+    window.addEventListener('load', () => {
+  const dateInput = document.getElementById("selectedDateInput");
+  const dateText = document.getElementById("selectedDateText");
+  if(dateInput) dateInput.value = "";
+  if(dateText) dateText.textContent = "";
+});
+
 </script>
 
 </body>
