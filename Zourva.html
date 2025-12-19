@@ -1,574 +1,500 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zourva</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
 <style>
+.card-content h2
+{
+  margin: 0;
+}
 
-  .calendar-header {
+:root{
+  --sand:#FAF7F2;
+  --sea:#2F6F8F;
+  --sea-light:#E6F2F7;
+  --olive:#7A8F5B;
+  --text-dark:#1F2937;
+  --text-soft:#555;
+}
+
+body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:var(--sand);
+  color:var(--text-dark);
+}
+
+h1,h2,h3{font-family:"Playfair Display",serif;}
+p{line-height:1.7;color:var(--text-soft);}
+
+.page-section{
+  max-width:1200px;
+  margin:auto;
+  padding:4rem 1.5rem;
+}
+
+/* CAROUSEL */
+.carousel{border-radius:20px;overflow:hidden;}
+.main-image{position:relative;aspect-ratio:1/1;}
+.main-image img{width:100%;height:100%;object-fit:cover;}
+.main-image button{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(47,111,143,.7);
+  border:none;color:#fff;
+  font-size:2rem;border-radius:50%;
+  padding:.4rem .7rem;cursor:pointer;
+}
+#prev{left:10px;} #next{right:10px;}
+
+/* TEXT */
+.trip-title{font-size:clamp(2rem,3vw,2.6rem);margin-top:0;}
+.trip-meta{color:var(--olive);margin:1rem 0;}
+
+/* BUTTON */
+.primary-btn{
+  background:var(--sea);
+  color:#fff;border:none;border-radius:999px;
+  padding:.9rem 2.2rem;font-size:1rem;cursor:pointer;
+  margin-bottom: 2vw;
+}
+.primary-btn:hover{background:#24566f;}
+
+/* POPUP */
+.overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.6);
+  justify-content:center;align-items:center;z-index:1000;
+}
+.overlay.active{display:flex;}
+
+.popup{
+  background:#fff;border-radius:20px;
+  padding:2rem;max-width:540px;width:90%;
+  position:relative;
+}
+
+.close{
+  position:absolute;top:14px;right:16px;
+  font-size:1.5rem;background:none;border:none;cursor:pointer;
+}
+
+/* FORM */
+.Email-form {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.8rem;
+  position: relative; /* required for absolute positioning of the calendar */
 }
 
-.calendar-header button {
-  background: #e0e0e0;
-  border: none;
-  padding: 4px 8px;
-  cursor: pointer;
-  border-radius: 4px;
+.Email-form label{
+  font-size:.8rem;text-transform:uppercase;
+  letter-spacing:.05em;color:var(--olive);
+}
+.Email-form input,
+.Email-form textarea{
+  padding:.7rem;border-radius:10px;
+  border:1px solid #ddd;font-size:1rem;
+}
+.Email-form input:focus,
+.Email-form textarea:focus{
+  outline:none;border-color:var(--sea);
 }
 
-.calendar-header button:hover {
-  background: #c8c8c8;
+/* CALENDAR */
+#calendarPopup {
+  position: absolute;   /* float over the form */
+  top: 50px;            /* adjust so it appears below the "Choose date" button */
+  left: 0;
+  width: 100%;          /* full width of the form */
+  background: #fff;
+  border-radius: 16px;
+  padding: 1rem;
+  max-height: 60vh;     /* don’t exceed screen height */
+  overflow-y: auto;     /* scroll if it’s too tall */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  z-index: 10;          /* above other elements */
 }
 
 
-  #calendarPopup {
-  position: absolute;
-  top: 60px;
-  left: 20px;
-  background: white;
-  border: 1px solid #ccc;
-  padding: 1%;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+.calendar-header{
+  display:flex;justify-content:space-between;align-items:center;
+}
+.calendar-grid{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  gap:6px;margin-top:10px;
+}
+.calendar-grid div{
+  padding:.6rem;border-radius:8px;font-size:.9rem;
+}
+.available{
+  background:var(--sea-light);
+  color:var(--sea);font-weight:600;cursor:pointer;
+}
+.available:hover{background:var(--sea);color:#fff;}
+.unavailable{color:#aaa;}
+.hidden{display:none;}
+
+/* SCROLL CARDS */
+.scrollmenu {
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  overflow-x: auto;
+  padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+  scroll-snap-type: x mandatory;
+
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;
 }
 
-.hidden {
+.scrollmenu::-webkit-scrollbar {
   display: none;
 }
 
-.calendar {
-  width: 100%;
-  text-align: center;
-}
-
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-  margin-top: 10px;
-}
-
-.calendar-grid div {
-  padding: 2.3vh 0.5vw;
-  border-radius: 4px;
-  font-size: 0.91vw;
-}
-
-.available {
-  background: #e0f0ff;
-  cursor: pointer;
-}
-
-.available:hover {
-  background: #a9d4ff;
-}
-
-.unavailable {
-  color: #aaa;
-}
-
-
-  .carousel {
-  width: 100%;
-  margin: auto;
-  text-align: center;
-  font-family: sans-serif;
-}
-
-.main-image {
-  position: relative;
-}
-
-.main-image img {
-  width: 100%;
-  border-radius: 3%;
-  object-fit: cover;
-}
-
-.main-image button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.4);
-  border: none;
-  color: white;
-  font-size: 24px;
-  padding: 2.3vh 0.8vw;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-#prev { left: 2%; }
-#next { right: 2%; }
-
-.thumbnails {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-  gap: 2%;
-}
-
-.thumbnails img {
-  width: 6.5vw;
-  height: 10vh;
-  object-fit: cover;
-  border-radius: 4px;
-  cursor: pointer;
-  opacity: 0.6;
-  transition: 0.2s;
-}
-
-.thumbnails img.active,
-.thumbnails img:hover {
-  opacity: 1;
-  border: 2px solid #007bff;
-}
-
-
-    .travel-card {
-  width: 20vw;   /* width: clamp(50px, 26vw, 330px);    width: clamp(220px, 28vw, 330px); */
-  border-radius: clamp(10px, 2vw, 20px);
-  overflow: hidden;
+.travel-card {
+  flex: 0 0 clamp(260px, 20vw, 300px);
+  scroll-snap-align: start;
   background: #fff;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  font-family: "Inter", sans-serif;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+}
+
+.card-content p {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  margin: 0.4rem 0 0.8rem;
 }
 
 .card-image {
   width: 100%;
-  height: 12vw; /* height: clamp(120px, 16vw, 200px); */
+  height: 180px;
   object-fit: cover;
+  background: #eee; /* fallback */
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
 }
 
-.card-content {
-  padding: 1.13vw 1.25vw; /* padding: clamp(10px, 1.8vw, 18px) clamp(12px, 2vw, 20px); */
-}
 
-.card-content h2 {
-  font-size: 2vw;  /* font-size: clamp(1rem, 1.4vw, 1.4rem); */
-   margin: 0;/* margin: 0 0 clamp(6px, 1vw, 10px) 0; */
-  font-weight: 600;
-}
-
-.card-content p {
-  font-size: 1.2vw;  /* font-size: clamp(0.75rem, 1vw, 0.95rem); */
-  color: #555;
-  line-height: 1.4;
-  margin-bottom: 1vh; /* margin-bottom: clamp(12px, 1.6vw, 20px); */
-}
+.card-image{width:100%;height:180px;object-fit:cover;}
+.card-content{padding:1.2rem;}
 
 .cta-btn {
-  padding: 1vw 1.8vw;  /* padding: clamp(8px, 1vw, 12px) clamp(14px, 1.8vw, 20px); */
-  background: #000;
-  color: #fff;
+  display: inline-block;       /* behaves like a button */
+  text-decoration: none;       /* remove underline */
+  background: var(--olive);
   border: none;
-  border-radius: clamp(16px, 2vw, 30px);
-  font-size: 1vw; /* font-size: clamp(.75rem, 1vw, 0.95rem); */
+  border-radius: 999px;
+  color: #fff;
+  padding: .6rem 1.6rem;
   cursor: pointer;
-  transition: 0.2s ease;
+  font-size: 1rem;
+  text-align: center;
+  transition: background 0.3s;
 }
+
 
 .cta-btn:hover {
-  background: #333;
+  background: #5f7245; /* slightly darker olive for hover */
 }
 
-.scrollmenu {
-  padding: 0 10%;
-  box-sizing: border-box;
+/* FOOTER */
+footer {
+  background-color: #1F2937;
+  color: white;
+  padding: 3em 5%;
   display: flex;
-  gap: 3vw; /* gap: clamp(20px, 3vw, 45px); */
-  padding-bottom: 40px;
-  width: 100%;
-  height: fit-content;
-  white-space: nowrap;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2em;
 }
 
-.product-card {
-  float: none;
+footer a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 0.5em;
   display: inline-block;
 }
 
-/* hide scrollbar */
-::-webkit-scrollbar {
-  display: none;
+footer p {
+  color: #ccc;
+  font-size: 0.9rem;
 }
-
-
+}
 </style>
-     <link rel="stylesheet" href="style.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zourva</title>
 </head>
+
 <body>
 
-  <script>
-    const Resa = "Zourva";
-    let submitted;
-    if (submitted == true)
-    {
-      alert("hello");
-    }
-
-    else
-    {
-      submitted = false;
-    }
-  </script>
-
+<section class="page-section">
+  <div style="display:flex;gap:3rem;flex-wrap:wrap;">
     
-   <div class="one">
-        <div class="wall"></div>
-        <div class="">
-
+    <!-- Carousel -->
+    <div style="flex:1 1 400px;">
+      <div class="carousel">
+        <div class="main-image">
+          <button id="prev">❮</button>
+          <img id="currentImage" src="./images/1.jpg">
+          <button id="next">❯</button>
         </div>
-        <div class="wall"></div>
-   </div>
-
-
-   <div class="one">
-        <div class="wall"></div>
-        <div class="container1" style="padding: 6% 0 6% 0; width: 100%; gap: 5%;">
-            <div class="container" style="flex: 1 1 45%; align-self: flex-start;">
-               <div class="carousel">
-  <div class="main-image">
-    <button id="prev">❮</button>
-    <img id="currentImage" src="./images/1.jpg" alt="" style="aspect-ratio: 3/3;">
-    <button id="next">❯</button>
-  </div>
-
-  <div class="thumbnails">
-    <img class="thumb active" src="./images/1.jpg" data-index="0">
-    <img class="thumb" src="./images/2.jpg" data-index="1">
-    <img class="thumb" src="img3.jpg" data-index="2">
-    <img class="thumb" src="img4.jpg" data-index="3">
-  </div>
-</div>
-
-            </div>
-            <div class="container4" style="align-items: flex-start; flex: 1 1 45%; width: 100%; height: 100%;">
-                
-                <div style="width: 100%; flex: 1 1 auto; font-size: 2vw;">
-                  <h2 style="margin-top: 0; font-size: 2vw;">
-                      Falassarna
-                    </h2>
-                  <p style="font-size: 1.2vw;">
-                    Lindas specialare, en livsnjutartur utan dess like.....
-<br><br>
-En utflykt jag haft under många år med variationer.
-<br><br>
-Vi åker alltid till den oexploaterade, tysta delen av Falassarna stranden och njuter av sol/bad under förmiddags timmarna.....livet utan stress. Innan vi åker vidare tar vi kanske en liten aperetiv vid baren över stranden där vi samtidigt kan blicka ut över det öppna havet, bergen som omsluter oss och hela bukten av Falassarna!
-<br><br>
-Lagom till lunch åker vi upp på nya underbara bergsvägar till en ny traditionell taverna i bergen där vi äter en lunch av enbart typiska rätter från Chania/Kreta (ett tio-tal) garanterat nya smaker!
-<br><br>
-Vi fortsätter därefter, mätta & belåtna till vingården "Karavitakis" där vi kommer vinprova total 6 viner från lokala/internationella druvsorter.
-<br><br>
-START ca.09.00 HEM ca.17.30
-<br>
-Pris 70€/person
-<br>
-Vinprovning ingår
-<br>
-Mat tillkommer på ca. 16€/person för mat/dryck
-                  </p>
-                </div>
-                <div class="container1" style="gap: 10%; width: 100%; justify-content: space-between; flex: 1 1 auto;">
-                    <div style="flex: auto; height: 100%;">
-                        <button id="openCalendarBtn" style="width: 100%; height: 100%; border-radius: 2%;"></button>
-                        <div id="selectedDateDisplay"></div>
-                        <label for="openCalendarBtn" id="selectedDateDisplay"></label>
-
-<div id="calendarPopup" class="hidden">
-  <div class="calendar">
-    <div class="calendar-header">
-      <button id="prevMonth">❮</button>
-      <h3 id="monthLabel"></h3>
-      <button id="nextMonth">❯</button>
+      </div>
     </div>
 
-    <div class="calendar-grid" id="calendarGrid"></div>
+    <!-- Text -->
+    <div style="flex:1 1 400px;">
+      <h2 class="trip-title">Zourva</h2>
+
+<div class="trip-meta">
+  ⏰ Start ca. 14:30 – Hem ca. 19:30<br><br>
+  🍷 Vin- & ostprovning inkluderat · €65/person<br><br>
+  🍽️ Mat tillkommer ca. 15–18 €/person
+</div>
+
+<p>
+  En eftermiddags- och kvällstur som har blivit min personliga favorit –
+  en perfekt kombination av bergsvyer, livsnjutning och genuina smaker.
+</p>
+
+<p>
+  Vi kör upp i Chaniaregionens <strong>Vita berg</strong> via den vackra
+  <strong>Therisoravinen</strong> och stannar i byn Theriso för vin- och
+  ostprovning i lugn bergsmiljö.
+</p>
+
+<p>
+  Därefter fortsätter vi högre upp i bergen mot byn <strong>Zourva</strong>,
+  med storslagna vyer längs hela vägen.
+</p>
+
+<p>
+  Kvällen avslutas på en traditionell taverna där vi serveras cirka
+  <strong>7–10 typiska rätter</strong> från Chanialänet och Kreta –
+  en garanterad smakupplevelse.
+</p>
+
+<button id="openFormBtn" class="primary-btn">
+        Boka upplevelsen
+      </button>
+
+    </div>
+  </div>
+</section>
+
+<!-- POPUP FORM -->
+<div id="formOverlay" class="overlay">
+  <div class="popup">
+    <button id="closeFormBtn" class="close">×</button>
+
+    <form class="Email-form" id="form">
+
+      <label>Select date</label>
+      <button type="button" id="openCalendarBtn" class="primary-btn">
+        Välj datum
+      </button>
+      <div id="selectedDateText"></div>
+      <input type="hidden" name="selected_date" id="selectedDateInput" required autocomplete="off">
+
+      <div id="calendarPopup" class="hidden">
+        <div class="calendar-header">
+          <button type="button" id="prevMonth">❮</button>
+          <h3 id="monthLabel"></h3>
+          <button type="button" id="nextMonth">❯</button>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+      </div>
+
+      <label>Email</label>
+      <input type="email" name="email" required>
+
+      <label>Name</label>
+      <input type="text" name="name" required>
+
+      <label>Mobile number</label>
+      <input type="text" name="Nummber" required>
+
+      <label>Number of people</label>
+      <input type="number" name="Personer" min="1" required>
+
+      <label>Message</label>
+      <textarea name="message" rows="4"></textarea>
+
+      <input type="submit" id="button" class="primary-btn" value="Skicka föfrågan">
+    </form>
   </div>
 </div>
 
-                    </div>
-                    <div style="flex: auto; height: 100%;">
-                        <form style="height: 100%;">
-                            <button style="width: 100%; height: 100%;"></button>
-                            <script>
-                              submitted = true;
-                            </script>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="wall"></div>
-   </div>
-
-
-
-
-
-
-
+<!-- SCROLL CARDS -->
 <div class="scrollmenu">
-    <div class="product-card">
-        <div class="travel-card">
-  <img src="./images/2.jpg"  class="card-image"/>
 
-  <div class="card-content">
-    <h2>Sarakina & Zourva</h2>
-    <p>
-      Far its historic temples, cherry blossoms, and serene gardens.  
-      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
-    </p>
-
-    <button class="cta-btn">Book Now →</button>
+  <div class="travel-card">
+    <img src="./images/zourva.jpg" class="card-image">
+    <div class="card-content">
+      <h2>Zourva</h2>
+      <p>By i bergen & traditionell lunch</p>
+      <a href="./Zourva.html" class="cta-btn">Utforska</a>
+    </div>
   </div>
-</div>
-</div>
-    <div class="product-card">
-        <div class="travel-card">
-  <img src="./images/komolithi.PNG" alt="Kyoto, Japan" class="card-image" />
 
-  <div class="card-content">
-    <h2>Komolithi</h2>
-    <p>
-      Far its historic temples, cherry blossoms, and serene gardens.  
-      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
-    </p>
-
-    <button class="cta-btn">Book Now →</button>
+  <div class="travel-card">
+    <img src="./images/Falassarna.jpg" class="card-image">
+    <div class="card-content">
+      <h2>Falassarna</h2>
+      <p>Gyllende strand & vinprovning</p>
+      <a href="./Falassarna.html" class="cta-btn">Utforska</a>
+    </div>
   </div>
-</div>
-</div>
-    <div class="product-card">
-        <div class="travel-card">
-  <img src="./images/Falassarna.jpg" alt="Kyoto, Japan" class="card-image" />
 
-  <div class="card-content">
-    <h2>Falassarna</h2>
-    <p>
-      Far its historic temples, cherry blossoms, and serene gardens.  
-      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
-    </p>
-
-    <button class="cta-btn">Book Now →</button>
+  <div class="travel-card">
+    <img src="./images/2.jpg" class="card-image">
+    <div class="card-content">
+      <h2>Sarakina</h2>
+      <p>Vandring i ravin & naturupplevelse</p>
+      <a href="./Sakarina_Zourva.html" class="cta-btn">Utforska</a>
+    </div>
   </div>
-</div>
-</div>
-    <div class="product-card">
-        <div class="travel-card">
-  <img src="./images/zourva.jpg" alt="Kyoto, Japan" class="card-image" />
 
-  <div class="card-content">
-    <h2>Zourva</h2>
-    <p>
-      Far its historic temples, cherry blossoms, and serene gardens.  
-      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
-    </p>
-
-    <button class="cta-btn">Book Now →</button>
+  <div class="travel-card">
+    <img src="./images/ravdouxa.jpg" class="card-image">
+    <div class="card-content">
+      <h2>Ravdouxa</h2>
+      <p>Avsklid kust & kristallklart vatten</p>
+      <a href="./Ravdouxa.html" class="cta-btn">Utforska</a>
+    </div>
   </div>
-</div>
-</div>
- <div class="product-card">
-        <div class="travel-card">
-  <img src="./images/ravdouxa.jpg"  class="card-image"/>
 
-  <div class="card-content">
-    <h2>Ravdouxa</h2>
-    <p>
-      Far its historic temples, cherry blossoms, and serene gardens.  
-      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
-    </p>
-
-    <button class="cta-btn">Book Now →</button>
+  <div class="travel-card">
+    <img src="./images/komolithi.PNG" class="card-image">
+    <div class="card-content">
+      <h2>Komolithi</h2>
+      <p>Unika lerformationer</p>
+      <a href="./Komolithi.html" class="cta-btn">Utforska</a>
+    </div>
   </div>
-</div>
-</div>
-<div class="product-card">
-        <div class="travel-card">
-  <img src="#"  class="card-image"/>
 
-  <div class="card-content">
-    <h2>Kyoto, Japan</h2>
-    <p>
-      Far its historic temples, cherry blossoms, and serene gardens.  
-      Round-trip airfare, 4-star hotels, guided tours, and a local transit pass.
-    </p>
+</div>
 
-    <button class="cta-btn">Book Now →</button>
+
+<footer>
+  <div>
+    <a href="#">Contact</a>
+    <p>Email: info@cretatravel.com</p>
   </div>
-</div>
-</div>
-   
-</div>
+  <div>
+    <a href="#">About</a>
+    <p>Learn more about our travel experiences in Crete.</p>
+  </div>
+  <div>
+    <a href="https://www.facebook.com/groups/2296845310643228/">Följ oss på</a>
+    <br>
+    <a href="https://www.facebook.com/groups/2296845310643228/">Facebook</a>
+  </div>
+</footer>
 
-
-
-
-<div class="one" style="background-color: #1F2937;">
-    <div class="wall"></div>
-     <diV class="footernote">
-        <div>
-            <a href="#" class="link">Hello</a><p>Hello</p>
-        </div>
-        <div>
-            <a href="#" class="link">Hello</a><p>Hello</p>
-        </div>
-        <div>
-            <a href="#" class="link">Hello</a><p>Hello</p>
-        </div>
-    </diV>
-    <div class="wall"></div>
-</div>
-
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-  const images = ["./images/1.jpg", "./images/2.jpg", "./images/", "./images/"];
+emailjs.init("n7qxqiKruT-IcJA90");
 
-let index = 0;
-const mainImg = document.getElementById("currentImage");
-const thumbnails = document.querySelectorAll(".thumb");
+/* Carousel */
+const images=["./images/1.jpg","./images/2.jpg","./images/3.jpg"];
+let index=0;
+const img=document.getElementById("currentImage");
+prev.onclick=()=>{index=(index-1+images.length)%images.length;img.src=images[index];};
+next.onclick=()=>{index=(index+1)%images.length;img.src=images[index];};
 
-function updateImage(newIndex) {
-  index = newIndex;
-  mainImg.src = images[index];
+/* Popup */
+const overlay=document.getElementById("formOverlay");
+openFormBtn.onclick=()=>overlay.classList.add("active");
+closeFormBtn.onclick=()=>overlay.classList.remove("active");
+overlay.onclick=e=>{if(e.target===overlay)overlay.classList.remove("active");};
 
-  thumbnails.forEach(t => t.classList.remove("active"));
-  thumbnails[index].classList.add("active");
-}
+/* Email */
+form.addEventListener("submit", e => {
+  e.preventDefault(); // Stop normal submission
 
-document.getElementById("prev").onclick = () => {
-  updateImage((index - 1 + images.length) % images.length);
-};
+  const dateInput = document.getElementById("selectedDateInput");
+  const btn = document.getElementById("button");
 
-document.getElementById("next").onclick = () => {
-  updateImage((index + 1) % images.length);
-};
-
-thumbnails.forEach((thumb, i) => {
-  thumb.onclick = () => updateImage(i);
-});
-
-</script>
-
-
-
-
-
-
-<script>
-// Example available dates
-const availableDates = [
-  "2025-01-10",
-  "2025-01-12",
-  "2025-01-17",
-  "2025-01-25",
-  "2025-02-02",
-  "2025-02-14",
-  "2025-03-05",
-  "2025-12-29",
-  "2026-01-08"
-];
-
-const openBtn = document.getElementById("openCalendarBtn");
-const calendarPopup = document.getElementById("calendarPopup");
-const calendarGrid = document.getElementById("calendarGrid");
-const monthLabel = document.getElementById("monthLabel");
-const selectedDisplay = document.getElementById("selectedDateDisplay");
-
-// Track displayed month
-let currentYear, currentMonth;
-
-// --- Generate Calendar ---
-function generateCalendar(year, month) {
-  calendarGrid.innerHTML = "";
-
-  currentYear = year;
-  currentMonth = month;
-
-  const firstDay = new Date(year, month, 1);
-  const lastDay = new Date(year, month + 1, 0);
-
-  monthLabel.textContent = firstDay.toLocaleString("default", {
-    month: "long",
-    year: "numeric"
-  });
-
-  // Blank cells until the first weekday
-  for (let i = 0; i < firstDay.getDay(); i++) {
-    calendarGrid.appendChild(document.createElement("div"));
+  // Custom validation for the date
+  if (!dateInput.value) {
+    alert("Please select a date before sending!");
+    return; // Stop sending if no date
   }
 
-  // Fill calendar cells
-  for (let day = 1; day <= lastDay.getDate(); day++) {
-    const date = new Date(year, month, day);
+  btn.value = 'Sending...';
 
-    // Manual safe formatting (fixes +1 bug)
-    const dateStr = [
-      date.getFullYear(),
-      String(date.getMonth() + 1).padStart(2, "0"),
-      String(date.getDate()).padStart(2, "0")
-    ].join("-");
+  const serviceID = 'default_service';
+  const templateID = 'template_yl0fvpd';
 
-    const div = document.createElement("div");
-    div.textContent = day;
+  emailjs.sendForm(serviceID, templateID, form)
+    .then(() => {
+      btn.value = 'Send request';
+      alert('Sent!');
+      form.reset(); // clear all fields
+      document.getElementById("selectedDateText").textContent = "";
+      dateInput.value = "";
+    })
+    .catch((err) => {
+      btn.value = 'Send request';
+      alert(JSON.stringify(err));
+    });
+});
 
-    if (availableDates.includes(dateStr)) {
-      div.className = "available";
-      div.onclick = () => selectDate(dateStr);
-    } else {
-      div.className = "unavailable";
-    }
+/* Calendar */
+const availableDates=["2025-01-10","2025-01-17","2025-02-14"];
+let currentYear,currentMonth;
 
+function generateCalendar(y,m){
+  calendarGrid.innerHTML="";
+  currentYear=y;currentMonth=m;
+  const first=new Date(y,m,1);
+  const last=new Date(y,m+1,0);
+  monthLabel.textContent=first.toLocaleString("default",{month:"long",year:"numeric"});
+  for(let i=0;i<first.getDay();i++)calendarGrid.appendChild(document.createElement("div"));
+  for(let d=1;d<=last.getDate();d++){
+    const s=`${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+    const div=document.createElement("div");
+    div.textContent=d;
+    if(availableDates.includes(s)){
+      div.className="available";
+      div.onclick=()=>selectDate(s);
+    }else div.className="unavailable";
     calendarGrid.appendChild(div);
   }
 }
 
-// --- Select Date ---
-function selectDate(dateStr) {
-  selectedDisplay.textContent = "Selected Date: " + dateStr;
+function selectDate(s){
+  const finalValue = s + " Zourva";
+
+  selectedDateText.textContent = "Selected date: " + finalValue;
+  selectedDateInput.value = finalValue;
+
   calendarPopup.classList.add("hidden");
 }
 
-// --- Open Calendar ---
-openBtn.onclick = () => {
+
+openCalendarBtn.onclick=()=>{
   calendarPopup.classList.toggle("hidden");
-
-  const now = new Date();
-  generateCalendar(now.getFullYear(), now.getMonth());
+  const now=new Date();
+  generateCalendar(now.getFullYear(),now.getMonth());
 };
 
-// --- Month Navigation Buttons ---
-document.getElementById("prevMonth").onclick = () => {
-  let month = currentMonth - 1;
-  let year = currentYear;
+prevMonth.onclick=()=>generateCalendar(currentYear,currentMonth-1<0?11:currentMonth-1,currentMonth-1<0?currentYear-1:currentYear);
+nextMonth.onclick=()=>generateCalendar(currentYear,currentMonth+1>11?0:currentMonth+1,currentMonth+1>11?currentYear+1:currentYear);
+</script>
 
-  if (month < 0) {
-    month = 11;
-    year--;
-  }
-
-  generateCalendar(year, month);
-};
-
-document.getElementById("nextMonth").onclick = () => {
-  let month = currentMonth + 1;
-  let year = currentYear;
-
-  if (month > 11) {
-    month = 0;
-    year++;
-  }
-
-  generateCalendar(year, month);
-};
-
+<script>
+    window.addEventListener('load', () => {
+  const dateInput = document.getElementById("selectedDateInput");
+  const dateText = document.getElementById("selectedDateText");
+  if(dateInput) dateInput.value = "";
+  if(dateText) dateText.textContent = "";
+});
 
 </script>
 
