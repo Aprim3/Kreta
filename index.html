@@ -1,163 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kreta Travel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kreta</title>
+<style>
+/* General resets */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+:root{
+  --sand:#FAF7F2;
+  --sea:#2F6F8F;
+  --sea-light:#E6F2F7;
+  --olive:#7A8F5B;
+  --text-dark:#1F2937;
+  --text-soft:#555;
+}
+
+body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:var(--sand);
+  color:var(--text-dark);
+}
+
+h1,h2,h3{font-family:"Playfair Display",serif;}
+p{line-height:1.7;color:var(--text-soft);}
+
+/* Hero Section */
+.hero {
+  width: 100%;
+  height: 60vh;
+  background: url('./images/Header.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hero h1 {
+  color: white;
+  font-size: clamp(2rem, 4vw, 4rem);
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+  text-align: center;
+  max-width: 80%;
+}
+
+/* Intro Quote */
+.intro {
+  text-align: center;
+  padding: 5% 10%;
+}
+
+.intro p {
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  font-style: italic;
+}
+
+/* Scrollable Travel Cards */
+.scrollmenu {
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  overflow-x: auto;
+  padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
+  scroll-snap-type: x mandatory;
+
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;
+}
+
+.scrollmenu::-webkit-scrollbar {
+  display: none;
+}
+
+.travel-card {
+  flex: 0 0 clamp(260px, 20vw, 300px);
+  scroll-snap-align: start;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+}
+
+.card-content p {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  margin: 0.4rem 0 0.8rem;
+}
+
+.card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: #eee; /* fallback */
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+}
+
+.card-content{padding:1.2rem;}
+
+.cta-btn {
+  display: inline-block;       /* behaves like a button */
+  text-decoration: none;       /* remove underline */
+  background: var(--olive);
+  border: none;
+  border-radius: 999px;
+  color: #fff;
+  padding: .6rem 1.6rem;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  transition: background 0.3s;
+}
+
+
+.cta-btn:hover {
+  background: #5f7245; /* slightly darker olive for hover */
+}
+
+/* Accordion */
+.accordion {
+  
+  max-width: 800px;
+  
+  border-radius: 0.5em;
+  overflow: hidden;
+  border: 1px solid #ccc;
+}
+
+.accordion input {
+  display: none;
+}
+
+.accordion-title {
+  display: block;
+  background-color: #1F2937;
+  color: white;
+  padding: 1em 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.accordion-title:hover {
+  background-color: #333;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  background-color: #f4f4f4;
+  padding: 0 1.2em;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.accordion input:checked ~ .accordion-content {
+  max-height: 500px; /* Large enough for most content */
+  padding: 1em 1.2em;
+}
+
+.accordion-content p {
+  margin-bottom: 1em;
+}
+
+/* Footer */
+footer {
+  background-color: #1F2937;
+  color: white;
+  padding: 3em 5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2em;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  display: inline-block;
+}
+
+footer p {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .travel-card { flex: 0 0 30%; }
+}
+
+@media (max-width: 768px) {
+  .travel-card { flex: 0 0 45%; }
+}
+
+@media (max-width: 480px) {
+  .travel-card { flex: 0 0 80%; }
+  .hero h1 { font-size: 2rem; }
+  .intro p { font-size: 1.2rem; }
+}
+</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    
-        
-    <div class="one" id="hero" style="color: white;">
-            <div class="wall"></div>
-        <div class="container">
-            <div class="header">
-                    <a href="./index.html" class="link">Start</a>
-                    <a href="./page1.html" class="link">Page one</a>
-                    <a href="./page2.html" class="link">Page two</a>
-                    <a href="./page3.html" class="link">Page three</a>
-                    <a href="./page4.html" class="link">Page four</a>
-            </div>
-            <h1 style="padding-top: 100px; padding-bottom: 75px;">Välkommen till Kreta lindas hemsida</h1>
-        </div>
-        <div class="wall"></div>
-    </div>
-        
-   
-    <div class="one" style="background-color: #E5E7EB;">
-        <div class="wall"></div>
-            <div class="container">
-                <div style="padding: 100px; padding-left: 150px; padding-right: 150px;">
-                    <p style="font-size: 36px; color: #1F2937;">"Jag får på mitt personliga och informativa sätt låta er se Kreta och livet här lite genom mina ögon. "</p>
-                </div>
-            </div>
-        <div class="wall"></div>
-    </div>
-   
-        
-    
-        
-   
-    <div>
-        
-        <div class="one" style="background-color: #f2f0;">
-            <div class="wall"></div>
-            <div style="display: flex; flex-direction: column; flex: 1 1 80%;">
-        <div class="container1">
-            <div> <!-- Image-->
-                <img src="./images/zourva.jpg" style="width: 450px; height: 400px; box-shadow: 10px 10px 15px; border-radius: 10px; flex: 1 1 auto;">
-            </div>
-            <div class="paragraph"> <!-- Text-->
-                <p style="width: 450px; height: 400px; flex: 1 1 auto;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam diam erat, porta vitae egestas in, varius a lorem. Praesent ac euismod felis. Integer dictum non eros in semper. <br><br>Nunc a rhoncus metus. Aliquam ac sem massa. Aenean rutrum, diam in placerat lacinia, mi purus imperdiet neque, in imperdiet diam nulla id dolor. Proin convallis laoreet lectus at convallis. Maecenas tristique nulla venenatis mattis dictum. <br><br>Cras nec arcu nec metus ornare interdum non ac mauris. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla feugiat ex dui, quis lacinia leo mattis ac. Maecenas dapibus augue sed risus luctus, quis egestas arcu tristique. Sed bibendum ex non purus efficitur, tincidunt aliquet mi eleifend.
 
-Cras mollis est eget diam cursus porttitor. <br><br>Quisque rutrum, tellus sed tristique malesuada, leo sem lobortis erat, vel convallis justo tellus eget quam. Praesent<br><br> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam diam erat, porta vitae egestas in, varius a lorem. Praesent ac euismod felis. Integer dictum non eros in semper.</p>
-            </div>
-        </div>
-        <div class="container1">
-            <div class="paragraph"> <!-- Text-->
-                <p style="width: 450px; height: 400px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam diam erat, porta vitae egestas in, varius a lorem. Praesent ac euismod felis. Integer dictum non eros in semper. <br><br>Nunc a rhoncus metus. Aliquam ac sem massa. Aenean rutrum, diam in placerat lacinia, mi purus imperdiet neque, in imperdiet diam nulla id dolor. Proin convallis laoreet lectus at convallis. Maecenas tristique nulla venenatis mattis dictum. <br><br>Cras nec arcu nec metus ornare interdum non ac mauris. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla feugiat ex dui, quis lacinia leo mattis ac. Maecenas dapibus augue sed risus luctus, quis egestas arcu tristique. Sed bibendum ex non purus efficitur, tincidunt aliquet mi eleifend.
+<!-- Hero Section -->
+ <div style="overflow: hidden;">
+<img src="./images/Header.png" style="width: 100%; overflow: hidden; aspect-ratio: 16/9; margin: -5% 0 -22% 0;">
+</div>
+<!-- Intro -->
+<div class="intro">
+  <p>"Jag får på mitt personliga sätt låta er se Kreta och livet här genom mina ögon."</p>
+</div>
 
-Cras mollis est eget diam cursus porttitor. <br><br>Quisque rutrum, tellus sed tristique malesuada, leo sem lobortis erat, vel convallis justo tellus eget quam. Praesent<br><br> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam diam erat, porta vitae egestas in, varius a lorem. Praesent ac euismod felis. Integer dictum non eros in semper.</p>
-            </div>
-            <div> <!-- Image-->
-                <img src="./images/Oceancity.png" style="width: 450px; height: 400px; box-shadow: 10px 10px 15px; border-radius: 10px;">
-            </div>
-        </div>
-        <div class="container1" style=" padding-bottom: 50px;">
-            <div> <!-- Image-->
-                <img src="./images/Cave.png" style="width: 450px; height: 400px; box-shadow: 10px 10px 15px; border-radius: 10px;">
-            </div>
-            <div class="paragraph"> <!-- Text-->
-                <p style="width: 450px; height: 400px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam diam erat, porta vitae egestas in, varius a lorem. Praesent ac euismod felis. Integer dictum non eros in semper. <br><br>Nunc a rhoncus metus. Aliquam ac sem massa. Aenean rutrum, diam in placerat lacinia, mi purus imperdiet neque, in imperdiet diam nulla id dolor. Proin convallis laoreet lectus at convallis. Maecenas tristique nulla venenatis mattis dictum. <br><br>Cras nec arcu nec metus ornare interdum non ac mauris. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla feugiat ex dui, quis lacinia leo mattis ac. Maecenas dapibus augue sed risus luctus, quis egestas arcu tristique. Sed bibendum ex non purus efficitur, tincidunt aliquet mi eleifend.
+<!-- Scrollable Travel Cards -->
+<div class="scrollmenu">
 
-Cras mollis est eget diam cursus porttitor. <br><br>Quisque rutrum, tellus sed tristique malesuada, leo sem lobortis erat, vel convallis justo tellus eget quam. Praesent<br><br> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam diam erat, porta vitae egestas in, varius a lorem. Praesent ac euismod felis. Integer dictum non eros in semper.</p>
-            </div>
-        </div>
-        </div>
-        <div class="wall"></div>
+  <div class="travel-card">
+    <img src="./images/zourva.jpg" class="card-image">
+    <div class="card-content">
+      <h2>Zourva</h2>
+      <p>Mountain village & traditional lunch</p>
+      <a href="zourva.html" class="cta-btn">Utforska</a>
     </div>
-        
-    </div>
+  </div>
 
-<div class="one">
-    <div class="wall"></div>
-    <div class="quote">
-        Hello this is an inspiring quote
+  <div class="travel-card">
+    <img src="./images/Falassarna.jpg" class="card-image">
+    <div class="card-content">
+      <h2>Falassarna</h2>
+      <p>Golden beach & wine tasting</p>
+      <a href="zourva.html" class="cta-btn">Utforska</a>
     </div>
-    <div class="wall"></div>
+  </div>
+
+  <div class="travel-card">
+    <img src="./images/2.jpg" class="card-image">
+    <div class="card-content">
+      <h2>Sarakina</h2>
+      <p>Gorge walk & nature escape</p>
+      <a href="zourva.html" class="cta-btn">Utforska</a>
+    </div>
+  </div>
+
+  <div class="travel-card">
+    <img src="./images/ravdouxa.jpg" class="card-image">
+    <div class="card-content">
+      <h2>Ravdouxa</h2>
+      <p>Secluded coast & crystal water</p>
+      <a href="zourva.html" class="cta-btn">Utforska</a>
+    </div>
+  </div>
+
+  <div class="travel-card">
+    <img src="./images/komolithi.PNG" class="card-image">
+    <div class="card-content">
+      <h2>Komolithi</h2>
+      <p>Unique clay formations</p>
+      <a href="zourva.html" class="cta-btn">Utforska</a>
+    </div>
+  </div>
 
 </div>
 
-    <div class="one" style="background-color: #E5E7EB;">
-        <div class="wall"></div>
-    
-        <div class="container1" style=" padding-top: 100px;">
-            
-                <div style=" border: 2px red solid; max-width: 350px;">
-                    <img src="./images/2.jpg" style="width: 350px; height: 400px; box-shadow: 10px 10px 15px; border-radius: 5px;">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula quis tortor ac dictum. Nunc scelerisque felis urna, ut volutpat nisi molestie nec. Aliquam ac sem eu ex mollis condimentum. </p>
-                </div>
-                <div style="margin-bottom: 200px; border: 2px red solid; max-width: 350px;">
-                    <img src="./images/seaside.png" style="width: 350px; height: 400px; box-shadow: 10px 10px 15px; border-radius: 5px;">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula quis tortor ac dictum. Nunc scelerisque felis urna, ut volutpat nisi molestie nec. Aliquam ac sem eu ex mollis condimentum. </p>
-                </div>
-            
+<!-- Accordion Section -->
+ <div style="margin: 2em auto; width: fit-content;">
+<div class="accordion">
+  <input type="checkbox" id="faq1">
+  <label class="accordion-title" for="faq1">Vilken tid är bäst att besöka Kreta?</label>
+  <div class="accordion-content">
+    <p>Den bästa tiden att besöka är mellan maj och oktober, När vädret är varmt och soligt.</p>
+  </div>
+  </div>
 
-        </div>
-    
-        <div class="wall"></div>
-    </div>
+  <div class="accordion">
+  <input type="checkbox" id="faq2">
+  <label class="accordion-title" for="faq2">Are guided tours available?</label>
+  <div class="accordion-content">
+    <p>Yes, we offer guided tours for historical sites, beaches, and cultural experiences.</p>
+  </div>
+  </div>
 
-
-    <div class="one" style="background-color: #f2f0ef;">
-            <div class="wall"></div>
-        <div class="container1" style="gap: 50px; padding: 50px;">
-           <div class="boxer">
-                <p>Över 20+ utförda utflykter</p>
-           </div>
-           <div class="boxer">
-            <p>Över 250+ 5 stjärniga betyg</p>
-                <img src="./images/5_stars.png" style="max-width: 250px;">
-           </div>
-           <div class="boxer">
-            <p>17+ år av erfarenhet</p>
-           </div>
-        </div>
-        <div class="wall"></div>
-    </div>
-
-
-<div class="one">
-    <div class="wall"></div>
-    <div class="quote">
-        <div class="contact">
-            <a href="#" style="font-size: xx-large; font-weight: 900;">Planera din resa nu</a>
-            <button style="border: 2px solid white; padding-left: 20px; padding-right: 20px; font-weight: 700;">Nu</button>
-        </div>
-    </div>
-    <div class="wall"></div>
-
+  <div class="accordion">
+  <input type="checkbox" id="faq3">
+  <label class="accordion-title" for="faq3">Can I book accommodations through your website?</label>
+  <div class="accordion-content">
+    <p>Yes, you can book 4-star hotels and boutique stays directly on our website.</p>
+  </div>
+  </div>
 </div>
 
+<!-- Footer -->
+<footer>
+  <div>
+    <a href="#">Contact</a>
+    <p>Email: info@cretatravel.com</p>
+  </div>
+  <div>
+    <a href="#">About</a>
+    <p>Learn more about our travel experiences in Crete.</p>
+  </div>
+  <div>
+    <a href="https://www.facebook.com/groups/2296845310643228/">Följ oss på</a>
+    <br>
+    <a href="https://www.facebook.com/groups/2296845310643228/">Facebook</a>
+  </div>
+</footer>
 
-
-    <div class="one" style="background-color: #1F2937;">
-        <div class="wall"></div>
-        <diV class="footernote">
-            <div>
-                <a href="#" class="link">Hello</a><p>Hello</p>
-            </div>
-            <div>
-                <a href="#" class="link">Hello</a><p>Hello</p>
-            </div>
-            <div>
-                <a href="#" class="link">Hello</a><p>Hello</p>
-            </div>
-        </diV>
-        <div class="wall"></div>
-    </div>
 </body>
 </html>
